@@ -1,17 +1,28 @@
 {
-  "name": "maxime_lestage_p7_18_10_2021",
-  "version": "1.0.0",
-  "description": "Application Fullstack Groupomania. Groupomania, votre réseau sociale d'entreprise. ",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Maxime LESTAGE débuté le 18 Octobre 2021 à 17:04.",
-  "license": "ISC",
-  "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "mysql2": "^2.3.2",
-    "sequelize": "^6.7.0"
-  }
+    "name": "maxime_lestage_p7_18_10_2021",
+    "version": "1.0.0",
+    "description": "Application Fullstack Groupomania. Groupomania, votre réseau sociale d'entreprise. ",
+    "main": "server.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Maxime LESTAGE débuté le 18 Octobre 2021 à 17:04.",
+    "license": "ISC",
+    "dependencies": {
+        "bcrypt": "^5.0.1",
+        "bcryptjs": "^2.4.3",
+        "cors": "^2.8.5",
+        "eslint-config-prettier": "^8.3.0",
+        "express": "^4.17.1",
+        "jshint": "^2.13.1",
+        "jsonwebtoken": "^8.5.1",
+        "mysql2": "^2.3.2",
+        "sequelize": "^6.7.0"
+    },
+    "devDependencies": {
+        "eslint": "^7.32.0",
+        "eslint-config-airbnb-base": "^14.2.1",
+        "eslint-plugin-import": "^2.25.2",
+        "prettier": "2.4.1"
+    }
 }

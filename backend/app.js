@@ -1,19 +1,20 @@
-const express = require("express");
+const express = require('express');
 const app = express();
-const path = require("path");
+// const path = require("path");
+const userRoutes = require('./app/routes/user.route');
 
 //? CORS signifie « Cross Origin Resource Sharing »
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, PATCH, OPTIONS"
-  );
-  next();
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader(
+        'Access-Control-Allow-Headers',
+        'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization'
+    );
+    res.setHeader(
+        'Access-Control-Allow-Methods',
+        'GET, POST, PUT, DELETE, PATCH, OPTIONS'
+    );
+    next();
 });
 
 // parse requests of content-type - application/json
@@ -23,8 +24,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to Groupomania BACKEND API application." });
+app.get('/', (req, res) => {
+    res.json({ message: 'Welcome to Groupomania BACKEND API application.' });
 });
+
+app.use('/api/auth', userRoutes);
 
 module.exports = app;
