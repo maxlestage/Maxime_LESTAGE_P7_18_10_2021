@@ -29,13 +29,13 @@ exports.userSignup = async (req, res) => {
 
 exports.userLogin = async (req, res) => {
     // Ma fonction de connexion
-
     let user = await User.findOne({ where: { mail: req.body.mail } });
     if (user) {
-        const hash = req.body.password;
+        const password = req.body.password;
+        const hash = user.password;
+        // console.log(password);
         // console.log(hash);
-        // console.log(user.password);
-        let valid = await bcrypt.compare(hash, user.password);
+        let valid = await bcrypt.compare(password, hash);
         // console.log(!valid);
         // console.log(valid);
         if (!valid) {
@@ -50,3 +50,11 @@ exports.userLogin = async (req, res) => {
         });
     }
 };
+
+// Delete all Tutorials from the database.
+exports.deleteAll = async (req, res) => {
+    const posts = await Post.findAll();
+};
+
+// Find all published Tutorials
+exports.findAllPublished = (req, res) => {};

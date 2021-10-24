@@ -1,7 +1,9 @@
 const express = require('express');
 const app = express();
 // const path = require("path");
-const userRoutes = require('./app/routes/user.route');
+const userRoutes = require('./app/routes/user.route.js');
+const postRoutes = require('./app/routes/post.route.js');
+const commentRoutes = require('./app/routes/comment.route.js');
 
 //? CORS signifie « Cross Origin Resource Sharing »
 app.use((req, res, next) => {
@@ -29,5 +31,6 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/auth', userRoutes);
-
+app.use('/api/posts', postRoutes);
+app.use('/api/posts', commentRoutes);
 module.exports = app;
