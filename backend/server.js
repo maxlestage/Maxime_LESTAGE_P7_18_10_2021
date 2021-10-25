@@ -13,8 +13,8 @@ const app = require('./app');
 //     await userCtrl.userLogin({ body: { mail: 'max@max.com' } }, {});
 // };
 
-// // db.sequelize.sync({ force: true });
-// db.sequelize.sync().then(() => {
+// // // db.sequelize.sync({ force: true });
+// db.sequelize.sync({ force: true }).then(() => {
 //     console.log('Drop and re-sync db.');
 //     run();
 // });
