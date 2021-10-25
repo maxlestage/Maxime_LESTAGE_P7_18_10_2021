@@ -2,6 +2,9 @@ const http = require('http');
 // Remplacement de http par https afin de bénéficier des certificats Secure Sockets Layer (SSL)
 const app = require('./app');
 
+// dotENV
+require('dotenv').config();
+
 // SEQUELIZE TEST START
 // const userCtrl = require('./app/controllers/users.controller.js');
 
@@ -14,7 +17,7 @@ const app = require('./app');
 // };
 
 // // // db.sequelize.sync({ force: true });
-// db.sequelize.sync({ force: true }).then(() => {
+// db.sequelize.sync().then(() => {
 //     console.log('Drop and re-sync db.');
 //     run();
 // });

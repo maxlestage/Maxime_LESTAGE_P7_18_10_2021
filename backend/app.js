@@ -2,9 +2,6 @@ const express = require('express');
 const app = express();
 // const path = require("path");
 
-// dotENV
-require('dotenv').config();
-
 // Middleware de gestion de session (cookie) :
 const expressSession = require('express-session');
 const sessionAuth = require('./app/middleware/session.js');
