@@ -2,6 +2,9 @@ const express = require('express');
 const app = express();
 // const path = require("path");
 
+// dotENV
+require('dotenv').config();
+
 // Middleware de gestion de session (cookie) :
 const expressSession = require('express-session');
 const sessionAuth = require('./app/middleware/session.js');
@@ -26,7 +29,7 @@ app.use((req, res, next) => {
 });
 
 // Middleware de gestion de session (cookie)
-app.use(expressSession({ secret: 'poo6EePho7yie8soh0Ai7aeBe' })); // PWGEN 25
+app.use(expressSession({ secret: process.env.SECRET_SESSION })); // PWGEN 25
 
 // Parse requests of content-type - application/json
 app.use(express.json());
@@ -40,6 +43,6 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/auth', userRoutes);
-app.use('/api/posts', sessionAuth, postRoutes);
+app.use('/api/posts', sessionAuth, postRoutes); // Session stock la session dans un cookie, authbyjwt permet la gestion des posts.
 app.use('/api/posts', sessionAuth, commentRoutes);
 module.exports = app;
