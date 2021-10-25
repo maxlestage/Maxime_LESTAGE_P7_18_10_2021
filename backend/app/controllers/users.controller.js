@@ -18,7 +18,7 @@ exports.userSignup = async (req, res) => {
             firstName: req.body.firstName, // req.body.firstName 'LESTAGE'
             mail: req.body.mail, // req.body.mail 'max@max.com'
             password: hash,
-            birthday: new Date('December 17, 1995'), // req.body.birthday
+            birthday: req.body.birthday, // req.body.birthday
             profilePicture: 0, // req.body.profilePicture
             isEnable: 0, // req.body.isEnable
         });
@@ -43,6 +43,10 @@ exports.userLogin = async (req, res) => {
             return res.status(401).json({ error: 'Mot de passe incorrect !' });
         }
         console.log('bon');
+
+        // Express-session :
+        req.session.userId = user.id; // userId = id > user.id
+
         return res.status(200).json({
             token: jwt.sign({ userId: user.id }, 'RANDOM_TOKEN_SECRET', {
                 expiresIn: '24h',
@@ -51,10 +55,10 @@ exports.userLogin = async (req, res) => {
     }
 };
 
-// Delete all Tutorials from the database.
-exports.deleteAll = async (req, res) => {
-    const posts = await Post.findAll();
-};
+// // Delete all Tutorials from the database.
+// exports.deleteAll = async (req, res) => {
+//     const posts = await Post.findAll();
+// };
 
-// Find all published Tutorials
-exports.findAllPublished = (req, res) => {};
+// // Find all published Tutorials
+// exports.findAllPublished = (req, res) => {};

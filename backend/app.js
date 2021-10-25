@@ -1,6 +1,12 @@
 const express = require('express');
 const app = express();
 // const path = require("path");
+
+// Middleware de gestion de session (cookie) :
+const expressSession = require('express-session');
+const sessionAuth = require('./app/middleware/session.js');
+
+// Routes :
 const userRoutes = require('./app/routes/user.route.js');
 const postRoutes = require('./app/routes/post.route.js');
 const commentRoutes = require('./app/routes/comment.route.js');
@@ -19,18 +25,21 @@ app.use((req, res, next) => {
     next();
 });
 
-// parse requests of content-type - application/json
+// Middleware de gestion de session (cookie)
+app.use(expressSession({ secret: 'poo6EePho7yie8soh0Ai7aeBe' })); // PWGEN 25
+
+// Parse requests of content-type - application/json
 app.use(express.json());
 
-// parse requests of content-type - application/x-www-form-urlencoded
+// ¨arse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-// simple route
+// Simple route
 app.get('/', (req, res) => {
     res.json({ message: 'Welcome to Groupomania BACKEND API application.' });
 });
 
 app.use('/api/auth', userRoutes);
-app.use('/api/posts', postRoutes);
-app.use('/api/posts', commentRoutes);
+app.use('/api/posts', sessionAuth, postRoutes);
+app.use('/api/posts', sessionAuth, commentRoutes);
 module.exports = app;

@@ -3,7 +3,8 @@ const { Post, User } = require('../models/index.model');
 // Create and Save a new Post
 exports.create = async (req, res) => {
     const date = new Date();
-    const user = await User.findByPk(req.body.userId);
+    // const user = await User.findByPk(req.body.userId);
+    const user = res.locals.user;
     if (user === null) {
         return res.status(401).json({ message: "l'utilisateur n'existe pas." });
     }
@@ -21,6 +22,7 @@ exports.create = async (req, res) => {
 
 // Find a single Tutorial with an id
 exports.findOne = async (req, res) => {
+    // console.log(req.session.userId);
     const post = await Post.findByPk(req.params.id);
     if (post === null) {
         return res.status(404).json({ message: "Ce post n'éxiste pas." });
