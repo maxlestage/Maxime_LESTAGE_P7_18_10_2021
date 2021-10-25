@@ -1,5 +1,4 @@
 .DS_store
 /node_modules
-.eslintrc.json
-.prettierrc.json
 app/config/db.config.js
+.env
