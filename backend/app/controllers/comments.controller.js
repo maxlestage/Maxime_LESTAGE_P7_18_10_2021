@@ -5,9 +5,7 @@ exports.create = async (req, res) => {
     const post = await Post.findByPk(req.params.postid);
 
     if (user === null) {
-        return res
-            .status(401)
-            .json({ message: "L'utilisateur n'éxiste pas. " });
+        return res.status(401).json({ message: "L'utilisateur n'éxiste pas." });
     }
 
     if (post === null) {

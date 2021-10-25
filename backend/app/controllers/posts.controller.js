@@ -39,25 +39,42 @@ exports.findAll = async (req, res) => {
 // Update a Tutorial by the id in the request
 exports.update = async (req, res) => {
     const date = new Date();
+
     const post = await Post.findByPk(req.params.id);
     if (post === null) {
         return res.status(404).json({ message: "Ce post n'éxiste pas." });
     }
-    const updatePost = await post.update({
-        title: req.body.title,
-        content: req.body.content,
-        file: req.body.file,
-        date: date,
-    });
-    return res.status(200).json(updatePost.toJSON());
+
+    const user = res.locals.user;
+
+    if (user.id === post.userId) {
+        const updatePost = await post.update({
+            title: req.body.title,
+            content: req.body.content,
+            file: req.body.file,
+            date: date,
+        });
+        return res.status(200).json(updatePost.toJSON());
+    } else {
+        return res
+            .status(401)
+            .json({ message: 'Vous ne pouvez pas faire de modifications.' });
+    }
 };
 
 // Delete a Tutorial with the specified id in the request
 exports.delete = async (req, res) => {
     const post = await Post.findByPk(req.params.id);
+
     if (post === null) {
         return res.status(404).json({ message: "Ce post n'éxiste pas." });
     }
-    await post.destroy();
-    return res.status(204).send(); //* Si 204 pas de body, si 200 on peut faire un message.json({message: "Post effacé."}); .
+    if (user.id === post.userId) {
+        await post.destroy();
+        return res.status(204).send(); //* Si 204 pas de body, si 200 on peut faire un message.json({message: "Post effacé."}); .
+    } else {
+        return res
+            .status(401)
+            .json({ message: 'Vous ne pouvez pas faire de suppression.' });
+    }
 };
