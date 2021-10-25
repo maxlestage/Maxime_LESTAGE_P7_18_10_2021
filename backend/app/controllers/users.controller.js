@@ -42,16 +42,17 @@ exports.userLogin = async (req, res) => {
             console.log('err');
             return res.status(401).json({ error: 'Mot de passe incorrect !' });
         }
-        console.log('bon');
+        // console.log('bon');
 
         // Express-session :
         req.session.userId = user.id; // userId = id > user.id
 
-        return res.status(200).json({
-            token: jwt.sign({ userId: user.id }, 'RANDOM_TOKEN_SECRET', {
-                expiresIn: '24h',
-            }),
-        });
+        return res.status(200).json({ message: 'utilisateur connecté.' });
+        // .json({
+        //     token: jwt.sign({ userId: user.id }, 'RANDOM_TOKEN_SECRET', {
+        //         expiresIn: '24h',
+        //     }),
+        // });
     }
 };
 
