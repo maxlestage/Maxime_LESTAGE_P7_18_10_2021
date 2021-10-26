@@ -13,5 +13,6 @@ const commentCtrl = require('../controllers/comments.controller.js');
 
 router.post('/:postid/comments', commentCtrl.create);
 router.get('/:postid/comments', commentCtrl.findAllByPost); // get sur le post id tous les comment'
+router.delete('/:postid/comments/:commentid', commentCtrl.delete);
 
 module.exports = router;
