@@ -65,6 +65,7 @@ exports.update = async (req, res) => {
 // Delete a Tutorial with the specified id in the request
 exports.delete = async (req, res) => {
     const post = await Post.findByPk(req.params.id);
+    const user = res.locals.user;
 
     if (post === null) {
         return res.status(404).json({ message: "Ce post n'éxiste pas." });
