@@ -24,15 +24,21 @@ db.Comment = require('./comment.model.js')(sequelize, Sequelize);
 db.Post = require('./post.model.js')(sequelize, Sequelize);
 
 // Clé étrangère userId qui lie, la table users à Post
-db.User.hasMany(db.Post);
+db.User.hasMany(db.Post, {
+    onDelete: 'CASCADE',
+});
 db.Post.belongsTo(db.User);
 
 // Clé étrangère userId qui lie, la table users à Post
-db.User.hasMany(db.Comment);
+db.User.hasMany(db.Comment, {
+    onDelete: 'CASCADE',
+});
 db.Comment.belongsTo(db.User);
 
 // Clé étrangère postId qui lie, la table Post à Comment
-db.Post.hasMany(db.Comment);
+db.Post.hasMany(db.Comment, {
+    onDelete: 'CASCADE',
+});
 db.Comment.belongsTo(db.Post);
 
 module.exports = db;
