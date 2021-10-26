@@ -6,21 +6,28 @@ const app = require('./app');
 require('dotenv').config();
 
 // SEQUELIZE TEST START
-// const userCtrl = require('./app/controllers/users.controller.js');
+const userCtrl = require('./app/controllers/users.controller.js');
 
-// const db = require('./app/models/index.model');
-// const postCtrl = require('./app/controllers/posts.controller.js');
-// const commentCtrl = require('./app/controllers/comments.controller.js');
+const db = require('./app/models/index.model');
 
-// const run = async () => {
-//     await userCtrl.userLogin({ body: { mail: 'max@max.com' } }, {});
-// };
+const run = async () => {
+    await userCtrl.userSignup({
+        body: {
+            lastName: process.env.LASTNAME,
+            firstName: process.env.FIRSTNAME,
+            mail: process.env.MAIL,
+            password: process.env.PASSWORD,
+            birthday: process.env.BIRTHDAY,
+            profilePicture: process.env.PROFILEPICTURE,
+            isEnable: process.env.ISENABLE,
+        },
+    });
+};
 
-// // // db.sequelize.sync({ force: true });
-// db.sequelize.sync().then(() => {
-//     console.log('Drop and re-sync db.');
-//     run();
-// });
+db.sequelize.sync({ alter: true }).then(() => {
+    console.log('ADMIN créé');
+    run();
+});
 
 // SEQUELIZE TEST END
 
