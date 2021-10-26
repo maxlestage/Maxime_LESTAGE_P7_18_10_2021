@@ -69,8 +69,10 @@ exports.delete = async (req, res) => {
 
     if (post === null) {
         return res.status(404).json({ message: "Ce post n'éxiste pas." });
-    }
-    if (user.id === post.userId) {
+    } else if (user.id === 1) {
+        await post.destroy();
+        return res.status(204).json({ message: "L'admin a effacé ce post." });
+    } else if (user.id === post.userId) {
         await post.destroy();
         return res.status(204).send(); //* Si 204 pas de body, si 200 on peut faire un message.json({message: "Post effacé."}); .
     } else {
