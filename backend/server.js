@@ -11,7 +11,7 @@ const userCtrl = require('./app/controllers/users.controller.js');
 const db = require('./app/models/index.model');
 
 const run = async () => {
-    await userCtrl.userSignup({
+    await userCtrl.userSignupAdmin({
         body: {
             lastName: process.env.LASTNAME,
             firstName: process.env.FIRSTNAME,
@@ -23,7 +23,7 @@ const run = async () => {
         },
     });
 };
-
+// alter ou force
 db.sequelize.sync({ alter: true }).then(() => {
     console.log('ADMIN créé');
     run();
