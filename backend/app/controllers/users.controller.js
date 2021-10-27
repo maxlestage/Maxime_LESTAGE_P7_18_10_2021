@@ -1,6 +1,7 @@
 const { User } = require('../models/index.model.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { locals } = require('../../app.js');
 
 // Fonction pour créer un utilisateur avec un mot de passe chiffré|Hashé à l'aide de bcrypt.
 exports.userSignup = async (req, res) => {
@@ -19,7 +20,7 @@ exports.userSignup = async (req, res) => {
             mail: req.body.mail, // req.body.mail 'max@max.com'
             password: hash,
             birthday: req.body.birthday, // req.body.birthday
-            profilePicture: 0, // req.body.profilePicture
+            profilePicture: req.file.filename, // req.body.profilePicture
             isEnable: 0, // req.body.isEnable
         });
         console.log('je suis ici');
@@ -53,6 +54,46 @@ exports.userLogin = async (req, res) => {
         //         expiresIn: '24h',
         //     }),
         // });
+    }
+};
+
+exports.userEdit = async (req, res) => {
+    const user = res.locals.user;
+    if (user === null) {
+        return res.status(401).json({ message: 'Vous devez être connecté' });
+    }
+
+    if (user) {
+        userUpdate = await user.update({
+            lastName: req.body.lastName, // req.body.lastName 'Ben'
+            firstName: req.body.firstName, // req.body.firstName 'LESTAGE'
+            birthday: req.body.birthday, // req.body.birthday
+            profilePicture: req.file.filename, // req.body.profilePicture
+            isEnable: 0, // req.body.isEnable
+        });
+        return res.status(201).json(userUpdate.toJSON());
+    }
+};
+
+exports.userSignupAdmin = async (req, res) => {
+    // Ma fonction de création de compte
+    let user = await User.findOne({ where: { mail: req.body.mail } });
+    if (user !== null) {
+        console.log('Un admin est déjà créé');
+    }
+    if (user === null) {
+        const hash = await bcrypt.hash(req.body.password, 10);
+        user = await User.create({
+            lastName: req.body.lastName, // req.body.lastName 'Ben'
+            firstName: req.body.firstName, // req.body.firstName 'LESTAGE'
+            mail: req.body.mail, // req.body.mail 'max@max.com'
+            password: hash,
+            birthday: req.body.birthday, // req.body.birthday
+            profilePicture: req.body.profilePicture, // req.body.profilePicture
+            isEnable: 0, // req.body.isEnable
+        });
+        console.log('je suis ici');
+        return res.status(201).json({ message: 'Utilisateur créé' });
     }
 };
 
