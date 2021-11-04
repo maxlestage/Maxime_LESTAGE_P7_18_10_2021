@@ -48,12 +48,26 @@ exports.userLogin = async (req, res) => {
         // Express-session :
         req.session.userId = user.id; // userId = id > user.id
 
-        return res.status(200).json({ message: 'utilisateur connecté.' });
+        return res.status(200).json({ message: 'Utilisateur connecté.' });
         // .json({
         //     token: jwt.sign({ userId: user.id }, 'RANDOM_TOKEN_SECRET', {
         //         expiresIn: '24h',
         //     }),
         // });
+    }
+};
+
+exports.userLogout = async (req, res) => {
+    if (req.session) {
+        req.session.destroy((err) => {
+            if (err) {
+                res.status(400).send('Impossible de se déconnecter');
+            } else {
+                res.send('Utilisateur déconnecté.');
+            }
+        });
+    } else {
+        res.end();
     }
 };
 
