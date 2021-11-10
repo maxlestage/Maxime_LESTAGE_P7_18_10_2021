@@ -1,0 +1,9 @@
+.toast-update {
+  position: relative !important;
+  min-height: 200px !important;
+}
+.toast {
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+}

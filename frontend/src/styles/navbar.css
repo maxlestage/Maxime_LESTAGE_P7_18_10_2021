@@ -1,0 +1,11 @@
+.bg-light {
+  background-color: #ffffff !important;
+}
+
+.navbar.navbar-expand-lg.navbar-light.bg-light {
+  margin-bottom: 5%;
+}
+
+/* h1 {
+  font-size: 1.5rem;
+} */
