@@ -25,7 +25,7 @@ function Card() {
         <div className="container-fluid mt-100">
           <div className="row">
             <div className="col-md-12">
-              <div className="card mb-4">
+              <div key={post.id} className="card mb-4">
                 <div className="card-header">
                   <div className="media flex-wrap w-100 align-items-center">
                     <img
@@ -34,9 +34,7 @@ function Card() {
                       alt=""
                     />
                     <div className="media-body ml-3">
-                      <a href="#" data-abc="true">
-                        {post.userId}
-                      </a>
+                      <a href="/user">{post.userId}</a>
                       <div className="text-muted small">
                         {`Publié le : ${new Intl.DateTimeFormat(
                           "fr-FR",

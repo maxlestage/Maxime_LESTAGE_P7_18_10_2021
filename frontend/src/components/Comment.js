@@ -1,46 +1,63 @@
-import { getAllComment, postComment } from "../service/comment.js";
+import { useEffect, useState } from "react";
+import { getAllComment } from "../service/comment.js";
 import "../styles/comment.css";
 
 function Comment() {
+  useEffect(() => {
+    getAllComment().then((response) => {
+      setComments(response.data);
+    });
+  }, []);
+
+  const [comments, setComments] = useState([]);
+
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
   return (
     <>
       <div className="container-fluid mt-100">
         <div className="row">
           <div className="col-md-12">
             <div className="card mb-4">
-              <div class="chat-messages p-4">
-                <div class="chat-message-right mb-4">
-                  <div>
-                    <img
-                      src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                      class="rounded-circle mr-1"
-                      alt="Chris Wood"
-                      width="40"
-                      height="40"
-                    />
-                    <div class="text-muted small text-nowrap mt-2">2:43 am</div>
+              <div className="chat-messages p-4">
+                {comments.map((comment) => (
+                  <div className="chat-message-left  pb-4">
+                    <div>
+                      <img
+                        src="https://bootdey.com/img/Content/avatar/avatar3.png"
+                        className="rounded-circle mr-1"
+                        alt="Sharon Lessman"
+                        width="40"
+                        height="40"
+                      />
+                    </div>
+
+                    <div className="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
+                      <div className="font-weight-bold text-left mb-1">
+                        {comment.userId}
+                      </div>
+                      <p className="text-left">{comment.content}</p>
+                      <p className="text-left small">
+                        {`${new Intl.DateTimeFormat("fr-FR", options).format(
+                          new Date(comment.createdAt)
+                        )}`}
+                      </p>
+                    </div>
                   </div>
-                  <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
-                    <div class="font-weight-bold mb-1">You</div>
-                    Lorem ipsum dolor sit amet, vis erat denique in, dicunt
-                    prodesset te vix.
-                  </div>
-                </div>
-                <div class="chat-message-left pb-4">
-                  <div>
-                    <img
-                      src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                      class="rounded-circle mr-1"
-                      alt="Sharon Lessman"
-                      width="40"
-                      height="40"
-                    />
-                    <div class="text-muted small text-nowrap mt-2">2:44 am</div>
-                  </div>
-                  <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
-                    <div class="font-weight-bold mb-1">Sharon Lessman</div>
-                    Sit meis deleniti eu, pri vidit meliore docendi ut, an eum
-                    erat animal commodo.
+                ))}
+                <div className="flex-grow-0 py-3 px-4 border-top">
+                  <div className="input-group">
+                    {" "}
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Type your message"
+                    />{" "}
+                    <button className="btn btn-primary">Send</button>
                   </div>
                 </div>
               </div>

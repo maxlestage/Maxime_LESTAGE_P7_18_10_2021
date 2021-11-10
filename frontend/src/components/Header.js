@@ -1,8 +1,10 @@
 // import React, { useState } from "react";
 import GroupomaniaBrand from "../assets/icon.svg";
-import { getAllPost } from "../service/post.js";
+// import { getAllPost } from "../service/post.js";
+import "../styles/navbar.css";
+
 function Header() {
-  //   const [choice, setChoice] = useState("");
+  // const [choice, setChoice] = useState("");
 
   return (
     <>
@@ -13,10 +15,10 @@ function Header() {
             width="50"
             height="50"
             className="d-inline-block"
-            alt=""
+            alt="Logo du groupe Groupomania"
           />
-          Groupomania
         </a>
+        <h1 className="text-center">Groupomania</h1>
         <button
           className="navbar-toggler"
           type="button"
@@ -41,13 +43,13 @@ function Header() {
               </a>
             </li>
           </ul>
-          <button
+          {/* <button
             onClick={() => {
               getAllPost();
             }}
           >
             test
-          </button>
+          </button> */}
         </div>
       </nav>
     </>
