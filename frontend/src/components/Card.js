@@ -68,10 +68,10 @@ function Card() {
   return (
     <div className="card-container">
       {posts.map((post) => (
-        <div className="container-fluid mt-100">
+        <div key={post.id} className="container-fluid mt-100">
           <div className="row">
             <div className="col-md-12">
-              <div key={post.id} className="card mb-4">
+              <div className="card mb-4">
                 <div className="card-header">
                   <div className="media flex-wrap w-100 align-items-center">
                     <img
