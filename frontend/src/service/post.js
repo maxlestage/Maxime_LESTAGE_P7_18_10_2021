@@ -2,6 +2,7 @@ import axios from "axios";
 
 // get all posts on the platform
 function getAllPost() {
+  axios.defaults.withCredentials = true;
   return axios({
     method: "get",
     url: "http://localhost:3000/api/posts",
@@ -10,6 +11,7 @@ function getAllPost() {
 
 // get all posts from user logged in
 function getAllPostByUser(userId) {
+  axios.defaults.withCredentials = true;
   // return axios({
   //   method: "get",
   //   url: `localhost:3000/api/auth/${1}`,

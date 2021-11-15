@@ -1,6 +1,7 @@
 import axios from "axios";
 
 function getAllComment(postId) {
+  axios.defaults.withCredentials = true;
   // postId = 2;
   return axios({
     method: "get",
@@ -10,6 +11,7 @@ function getAllComment(postId) {
 }
 
 function postComment(postId, userContent) {
+  axios.defaults.withCredentials = true;
   // postId = 2;
   return axios({
     method: "post",

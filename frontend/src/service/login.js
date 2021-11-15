@@ -32,7 +32,7 @@ function userLogin() {
 }
 function userLogout() {
   console.log("Logout");
-  //   axios.defaults.withCredentials = true;
+  axios.defaults.withCredentials = true;
   return axios({
     method: "delete",
     // headers: {
