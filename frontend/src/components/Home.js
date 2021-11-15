@@ -1,4 +1,5 @@
 import Card from "./Card";
+import Login from "./Login";
 // import Comment from "./Comment";
 // import UserPost from "./UserPost";
 // import Inputpost from "./InputPost";
@@ -7,9 +8,11 @@ import Card from "./Card";
 function Home() {
   return (
     <>
+      <Login />
       {/* <Toasts /> */}
       {/* <Inputpost /> */}
       {/* <UserPost /> */}
+
       <Card />
     </>
   );
