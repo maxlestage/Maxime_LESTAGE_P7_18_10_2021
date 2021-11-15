@@ -1,7 +1,9 @@
 import { userLogin, userLogout } from "../service/login";
 function Login() {
   function buttonOnClickLogin() {
-    userLogin()
+    userLogin();
+    window.location
+      .reload()
       .then((response) => {
         console.log(response.data);
       })
@@ -10,7 +12,9 @@ function Login() {
       });
   }
   function buttonOnClickLogout() {
-    userLogout()
+    userLogout();
+    window.location
+      .reload()
       .then((response) => {
         console.log(response.data);
       })
