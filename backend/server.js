@@ -24,10 +24,16 @@ const run = async () => {
     });
 };
 // alter ou force
-db.sequelize.sync({ alter: true }).then(() => {
-    console.log('ADMIN créé');
-    run();
-});
+// await sequelize.sync({ alter: true, force: false });
+db.sequelize
+    .sync({ alter: true, force: false })
+    .then(() => {
+        console.log('ADMIN créé');
+        run();
+    })
+    .catch((err) => {
+        console.log(err);
+    });
 
 // SEQUELIZE TEST END
 
