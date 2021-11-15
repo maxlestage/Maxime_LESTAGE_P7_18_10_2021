@@ -26,7 +26,7 @@ function Profile() {
               />
             </div>
             <div className="col-md-4 mb-3">
-              <label htmlFor="validationServerUsername">Username</label>
+              <label htmlFor="email">Mail</label>
               <div className="input-group">
                 <div className="input-group-prepend">
                   <span className="input-group-text" id="inputGroupPrepend3">
@@ -34,10 +34,10 @@ function Profile() {
                   </span>
                 </div>
                 <input
-                  type="text"
+                  type="mail"
                   className="form-control"
-                  id="validationServerUsername"
-                  placeholder="Username"
+                  id="email"
+                  placeholder="Mail"
                   aria-describedby="inputGroupPrepend3"
                   required
                 />
@@ -45,38 +45,17 @@ function Profile() {
             </div>
           </div>
           <div className="form-row">
-            <div className="col-md-6 mb-3">
-              <label htmlFor="validationServer03">City</label>
+            <div class="form-group">
+              <label for="exampleFormControlFile1">
+                Importer une photo de profile :
+              </label>
               <input
-                type="text"
-                className="form-control"
-                id="validationServer03"
-                placeholder="City"
-                required
-              />
-            </div>
-            <div className="col-md-3 mb-3">
-              <label htmlFor="validationServer04">State</label>
-              <input
-                type="text"
-                className="form-control"
-                id="validationServer04"
-                placeholder="State"
-                required
-              />
-            </div>
-            <div className="col-md-3 mb-3">
-              <label htmlFor="validationServer05">Zip</label>
-              <input
-                type="text"
-                className="form-control"
-                id="validationServer05"
-                placeholder="Zip"
-                required
+                type="file"
+                class="form-control-file"
+                id="exampleFormControlFile1"
               />
             </div>
           </div>
-
           <button className="btn btn-primary" type="submit">
             Valider
           </button>
