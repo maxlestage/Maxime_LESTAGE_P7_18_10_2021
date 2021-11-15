@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import { getAllComment } from "../service/comment.js";
 import "../styles/comment.css";
 
-function Comment() {
+function Comment({ postId }) {
   useEffect(() => {
-    getAllComment().then((response) => {
+    getAllComment(postId).then((response) => {
       setComments(response.data);
     });
-  }, []);
+    console.log("hello");
+  }, [postId]);
 
   const [comments, setComments] = useState([]);
 
@@ -51,11 +52,12 @@ function Comment() {
                 ))}
                 <div className="flex-grow-0 py-3 px-4 border-top">
                   <div className="input-group">
-                    {" "}
+                    {/* <label for="Give your idea">Partagez votre avis :</label> */}
                     <input
+                      aria-label="Partagez votre avis"
                       type="text"
                       className="form-control"
-                      placeholder="Type your message"
+                      placeholder="Partagez votre avis :"
                     />{" "}
                     <button className="btn btn-primary">Send</button>
                   </div>
