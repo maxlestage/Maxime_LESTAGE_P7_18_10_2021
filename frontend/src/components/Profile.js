@@ -45,13 +45,13 @@ function Profile() {
             </div>
           </div>
           <div className="form-row">
-            <div class="form-group">
-              <label for="exampleFormControlFile1">
+            <div className="form-group">
+              <label htmlFor="exampleFormControlFile1">
                 Importer une photo de profile :
               </label>
               <input
                 type="file"
-                class="form-control-file"
+                className="form-control-file"
                 id="exampleFormControlFile1"
               />
             </div>
