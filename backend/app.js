@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 // const path = require("path");
-
+// var cors = require('cors');
 // Middleware de gestion de session (cookie) :
 const expressSession = require('express-session');
 const sessionAuth = require('./app/middleware/session.js');
@@ -12,8 +12,16 @@ const postRoutes = require('./app/routes/post.route.js');
 const commentRoutes = require('./app/routes/comment.route.js');
 
 //? CORS signifie « Cross Origin Resource Sharing »
+// app.use(cors());
+// app.use(
+//     cors({
+//         origin: '*',
+//         methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD'],
+//         credentials: true,
+//     })
+// );
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:2000');
     res.setHeader(
         'Access-Control-Allow-Headers',
         'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization'
@@ -22,6 +30,7 @@ app.use((req, res, next) => {
         'Access-Control-Allow-Methods',
         'GET, POST, PUT, DELETE, PATCH, OPTIONS'
     );
+    res.setHeader('Access-Control-Allow-Credentials', true);
     next();
 });
 
@@ -40,6 +49,6 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/auth', userRoutes);
-app.use('/api/posts', sessionAuth, postRoutes); // Session stock la session dans un cookie, authbyjwt permet la gestion des posts.
-app.use('/api/posts', sessionAuth, commentRoutes);
+app.use('/api/posts', sessionAuth, postRoutes); // Session stock la session dans un cookie, authbyjwt permet la gestion des posts. sessionAuth
+app.use('/api/posts', sessionAuth, commentRoutes); // sessionAuth
 module.exports = app;
