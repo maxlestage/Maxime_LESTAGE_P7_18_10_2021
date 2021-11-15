@@ -2,9 +2,18 @@
   background-color: #ffffff !important;
 }
 
-.navbar.navbar-expand-lg.navbar-light.bg-light {
+/* .navbar.navbar-expand-lg.navbar-light.bg-light {
   margin-bottom: 5%;
-}
+} */
+
+/* .navbar {
+  margin-bottom: 10rem;
+  padding: 1rem;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+} */
 
 /* h1 {
   font-size: 1.5rem;
