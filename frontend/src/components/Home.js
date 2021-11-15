@@ -1,5 +1,5 @@
 import Card from "./Card";
-import Login from "./Login";
+// import Login from "./Login";
 // import Comment from "./Comment";
 // import UserPost from "./UserPost";
 // import Inputpost from "./InputPost";
@@ -8,7 +8,7 @@ import Login from "./Login";
 function Home() {
   return (
     <>
-      <Login />
+      {/* <Login choice={choice} onClick={() => setChoice(choice + 1)} /> */}
       {/* <Toasts /> */}
       {/* <Inputpost /> */}
       {/* <UserPost /> */}
