@@ -1,4 +1,5 @@
-const { User } = require('../models/index.model.js');
+const { User, Post } = require('../models/index.model.js');
+
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { locals } = require('../../app.js');
@@ -106,15 +107,47 @@ exports.userSignupAdmin = async (req, res) => {
             profilePicture: req.body.profilePicture, // req.body.profilePicture
             isEnable: 0, // req.body.isEnable
         });
-        console.log('je suis ici');
+        // console.log('je suis ici');
         return res.status(201).json({ message: 'Utilisateur créé' });
     }
 };
 
-// // Delete all Tutorials from the database.
-// exports.deleteAll = async (req, res) => {
-//     const posts = await Post.findAll();
+// // Find all posts from a user .
+// exports.getAllPostsByUser = async (req, res) => {
+//     const user = res.locals.user;
+//     const posts = await Post.findAll({
+//         where: { userId: req.params.id },
+//     });
+
+//     // console.log({ id: user.id });
+//     // console.log(parseInt(req.params.id));
+
+//     if (user.id === parseInt(req.params.id)) {
+//         return res.status(200).json(posts);
+//     } else {
+//         return res
+//             .status(404)
+//             .json({ message: 'Vous ne pouvez pas visualiser cette page' });
+//     }
 // };
 
-// // Find all published Tutorials
-// exports.findAllPublished = (req, res) => {};
+// Find all posts from a user.
+exports.getAllPostsByUser = async (req, res) => {
+    const user = res.locals.user;
+    if (parseInt(user.id) !== parseInt(req.params.id)) {
+        res.status(403).send("You don't have access");
+    } else {
+        const posts = await Post.findAll({
+            where: { userId: req.params.id },
+        });
+
+        // console.log({ id: user.id });
+        // console.log(parseInt(req.params.id));
+
+        if (posts.length) {
+            return res.status(200).json(posts);
+        } else {
+            return res.status(404).json({ message: 'Aucun post trouvé' });
+        }
+    }
+};
