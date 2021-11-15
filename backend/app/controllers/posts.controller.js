@@ -1,4 +1,5 @@
 const { Post, User } = require('../models/index.model');
+const { post } = require('../routes/post.route');
 
 // Create and Save a new Post
 exports.create = async (req, res) => {
@@ -20,7 +21,7 @@ exports.create = async (req, res) => {
     return res.status(201).json(post.toJSON());
 };
 
-// Find a single Tutorial with an id
+// Find a single Posts with an id
 exports.findOne = async (req, res) => {
     // console.log(req.session.userId);
     const post = await Post.findByPk(req.params.id);
@@ -30,13 +31,13 @@ exports.findOne = async (req, res) => {
     return res.status(200).json(post.toJSON());
 };
 
-// Retrieve all Tutorials from the database.
+// Retrieve all Posts from the database.
 exports.findAll = async (req, res) => {
     const posts = await Post.findAll();
     return res.status(200).json(posts);
 };
 
-// Update a Tutorial by the id in the request
+// Update a Posts by the id in the request
 exports.update = async (req, res) => {
     const date = new Date();
 
@@ -62,7 +63,7 @@ exports.update = async (req, res) => {
     }
 };
 
-// Delete a Tutorial with the specified id in the request
+// Delete a Posts with the specified id in the request
 exports.delete = async (req, res) => {
     const post = await Post.findByPk(req.params.id);
     const user = res.locals.user;
@@ -81,3 +82,20 @@ exports.delete = async (req, res) => {
             .json({ message: 'Vous ne pouvez pas faire de suppression.' });
     }
 };
+
+// exports.getAllUserPosts = async (req, res) => {
+//     const post = await Post.findByPk(req.params.id);
+//     const user = res.locals.user;
+//     // console.log(user);
+//     // console.log(post.userId);
+//     if (user.id === post.userId) {
+//         const posts = await Post.findAll({
+//             where: { userId: post.userId },
+//         });
+//         return res.status(200).json(posts);
+//     } else {
+//         return res
+//             .status(401)
+//             .json({ message: "Vous n'avez pas encore poster" });
+//     }
+// };
