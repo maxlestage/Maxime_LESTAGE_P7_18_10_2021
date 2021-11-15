@@ -1,7 +1,7 @@
 import axios from "axios";
 
 function getAllComment(postId) {
-  postId = 2;
+  // postId = 2;
   return axios({
     method: "get",
     url: `http://localhost:3000/api/posts/${postId}/comments`,
@@ -10,7 +10,7 @@ function getAllComment(postId) {
 }
 
 function postComment(postId, userContent) {
-  postId = 2;
+  // postId = 2;
   return axios({
     method: "post",
     url: `http://localhost:3000/api/posts/${postId}/comments`,
