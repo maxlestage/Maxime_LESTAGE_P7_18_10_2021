@@ -7,7 +7,7 @@ function Comment({ postId }) {
     getAllComment(postId).then((response) => {
       setComments(response.data);
     });
-    console.log("hello");
+    // console.log("hello");
   }, [postId]);
 
   const [comments, setComments] = useState([]);
@@ -26,7 +26,7 @@ function Comment({ postId }) {
             <div className="card mb-4">
               <div className="chat-messages p-4">
                 {comments.map((comment) => (
-                  <div className="chat-message-left  pb-4">
+                  <div key={comment.id} className="chat-message-left  pb-4">
                     <div>
                       <img
                         src="https://bootdey.com/img/Content/avatar/avatar3.png"
