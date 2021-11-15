@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { getAllPost } from "../service/post.js";
-import { getAllComment } from "../service/comment.js";
+// import { getAllComment } from "../service/comment.js";
 import "../styles/card.css";
 import Comment from "./Comment";
+import Inputpost from "./InputPost.js";
 
 function Card() {
   useEffect(() => {
@@ -19,8 +20,53 @@ function Card() {
     month: "long",
     day: "numeric",
   };
+
+  function Accordion({ postId }) {
+    console.log(postId);
+    const [activeIndex, setActiveIndex] = useState(0);
+    return (
+      <>
+        <Panel
+          isActive={activeIndex === 1}
+          onShow={() => setActiveIndex(1)}
+          onClose={() => setActiveIndex(0)}
+        >
+          <Comment postId={postId} />
+        </Panel>
+      </>
+    );
+  }
+
+  function Panel({ children, isActive, onShow, onClose }) {
+    return (
+      <section className="panel">
+        {isActive ? (
+          <>
+            {children}
+            <button
+              type="button"
+              className="showComment btn btn-secondary"
+              onClick={onClose}
+            >
+              Fermer
+            </button>
+          </>
+        ) : (
+          <button
+            type="button"
+            className="showComment btn btn-secondary"
+            onClick={onShow}
+          >
+            Voir les commentaires
+          </button>
+        )}
+      </section>
+    );
+  }
+
+  // { <Comment />}
   return (
-    <>
+    <div className="card-container">
       {posts.map((post) => (
         <div className="container-fluid mt-100">
           <div className="row">
@@ -50,16 +96,21 @@ function Card() {
                 </div>
                 <div className="card-footer">
                   <div className="text-right">
-                    <button
+                    {/* <button
                       type="button"
-                      className="btn btn-secondary"
+                      className="showComment btn btn-secondary"
                       onClick={() => {
-                        getAllComment(post.id);
+                        // getAllComment(post.id);
                       }}
                     >
                       Voir les commentaires
-                    </button>
-                    <Comment />
+                    </button> */}
+                    <Accordion
+                      postId={post.id}
+                      // onClick={() => {
+                      //   getAllComment(post.id);
+                      // }}
+                    />
                   </div>
                 </div>
               </div>
@@ -67,7 +118,8 @@ function Card() {
           </div>
         </div>
       ))}
-    </>
+      <Inputpost />
+    </div>
   );
 }
 
