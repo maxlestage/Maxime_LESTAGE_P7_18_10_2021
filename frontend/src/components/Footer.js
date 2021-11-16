@@ -6,7 +6,7 @@ function Footer() {
       <footer className="footer bg-light text-center text-lg-start footer-auto">
         <div className="container text-center p-3">
           © 2021 Copyright:
-          <a className="text-dark" href="/">
+          <a className="text-dark text-center" href="/">
             Groupomania
           </a>
         </div>
