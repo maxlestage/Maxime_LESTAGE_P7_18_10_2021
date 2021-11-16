@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 // const path = require("path");
-// var cors = require('cors');
+var cors = require('cors');
 // Middleware de gestion de session (cookie) :
 const expressSession = require('express-session');
 const sessionAuth = require('./app/middleware/session.js');
@@ -11,28 +11,33 @@ const userRoutes = require('./app/routes/user.route.js');
 const postRoutes = require('./app/routes/post.route.js');
 const commentRoutes = require('./app/routes/comment.route.js');
 
-//? CORS signifie « Cross Origin Resource Sharing »
-// app.use(cors());
-// app.use(
-//     cors({
-//         origin: '*',
-//         methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD'],
-//         credentials: true,
-//     })
-// );
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:2000');
-    res.setHeader(
-        'Access-Control-Allow-Headers',
-        'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization'
-    );
-    res.setHeader(
-        'Access-Control-Allow-Methods',
-        'GET, POST, PUT, DELETE, PATCH, OPTIONS'
-    );
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    next();
-});
+// ? CORS signifie « Cross Origin Resource Sharing »
+app.use(
+    cors({
+        origin: 'http://localhost:2000',
+        allowedHeaders: [
+            'Content-Type',
+            'Authorization',
+            'Access-Control-Allow-Methods',
+            'Access-Control-Request-Headers',
+        ],
+        credentials: true,
+        // enablePreflight: true,
+    })
+);
+// app.use((req, res, next) => {
+//     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:2000', '*');
+//     res.setHeader(
+//         'Access-Control-Allow-Headers',
+//         'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization'
+//     );
+//     res.setHeader(
+//         'Access-Control-Allow-Methods',
+//         'GET, POST, PUT, DELETE, PATCH, OPTIONS'
+//     );
+//     res.setHeader('Access-Control-Allow-Credentials', true);
+//     next();
+// });
 
 // Middleware de gestion de session (cookie)
 app.use(expressSession({ secret: process.env.SECRET_SESSION })); // PWGEN 25
