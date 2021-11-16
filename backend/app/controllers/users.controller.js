@@ -49,7 +49,12 @@ exports.userLogin = async (req, res) => {
         // Express-session :
         req.session.userId = user.id; // userId = id > user.id
 
-        return res.status(200).json({ message: 'Utilisateur connecté.' });
+        const userJson = user.toJSON();
+        delete userJson.password;
+        delete userJson.createdAt;
+        delete userJson.updatedAt;
+        delete userJson.isEnable;
+        return res.status(200).json(userJson);
         // .json({
         //     token: jwt.sign({ userId: user.id }, 'RANDOM_TOKEN_SECRET', {
         //         expiresIn: '24h',
@@ -112,6 +117,31 @@ exports.userSignupAdmin = async (req, res) => {
     }
 };
 
+exports.userMe = async (req, res) => {
+    const user = res.locals.user;
+    return res.status(200).json(user.toJSON());
+};
+
+// Find all posts from a user.
+exports.getAllPostsByUser = async (req, res) => {
+    // const user = res.locals.user;
+    // if (parseInt(user.id) !== parseInt(req.params.id)) {
+    //     res.status(403).send("You don't have access");
+    // } else {
+
+    const posts = await Post.findAll({
+        where: { userId: req.params.id },
+    });
+    // console.log({ id: user.id });
+    // console.log(parseInt(req.params.id));
+
+    if (posts.length) {
+        return res.status(200).json(posts);
+    } else {
+        return res.status(404).json({ message: 'Aucun post trouvé' });
+    }
+};
+
 // // Find all posts from a user .
 // exports.getAllPostsByUser = async (req, res) => {
 //     const user = res.locals.user;
@@ -130,24 +160,3 @@ exports.userSignupAdmin = async (req, res) => {
 //             .json({ message: 'Vous ne pouvez pas visualiser cette page' });
 //     }
 // };
-
-// Find all posts from a user.
-exports.getAllPostsByUser = async (req, res) => {
-    const user = res.locals.user;
-    if (parseInt(user.id) !== parseInt(req.params.id)) {
-        res.status(403).send("You don't have access");
-    } else {
-        const posts = await Post.findAll({
-            where: { userId: req.params.id },
-        });
-
-        // console.log({ id: user.id });
-        // console.log(parseInt(req.params.id));
-
-        if (posts.length) {
-            return res.status(200).json(posts);
-        } else {
-            return res.status(404).json({ message: 'Aucun post trouvé' });
-        }
-    }
-};
