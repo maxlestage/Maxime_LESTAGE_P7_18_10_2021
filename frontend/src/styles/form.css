@@ -1,3 +1,18 @@
 .profile-form {
   margin-top: 10% !important;
 }
+
+button.btn.btn-primary {
+  width: auto;
+  height: fit-content;
+}
+
+.SignIn_title {
+  padding-bottom: 10%;
+}
+
+.footer {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
