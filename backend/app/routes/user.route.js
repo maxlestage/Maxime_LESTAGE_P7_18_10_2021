@@ -21,6 +21,8 @@ router.put(
     userCtrl.userEdit
 );
 router.delete('/logout', sessionAuth, userCtrl.userLogout);
-router.get('/:id', sessionAuth, userCtrl.getAllPostsByUser);
+router.get('/user', sessionAuth, userCtrl.userMe);
+router.get('/:id', sessionAuth, userCtrl.getAllPostsByUser); // ordre de route si route avec specificité
+
 // Permet d'utiliser user.js du répertoire routes.dans app.js à la base du projet.
 module.exports = router;
