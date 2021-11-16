@@ -3,24 +3,24 @@ import { userLogin, userLogout } from "../service/login";
 import GroupomaniaBrand from "../assets/icon.svg";
 // import { getAllPost } from "../service/post.js";
 import "../styles/navbar.css";
-import { useState } from "react";
 
-function Header() {
-  let [choice, setChoice] = useState(true);
+function Header({ currentUser, onLogin }) {
+  // let [choice, setChoice] = useState(true);
 
-  function buttonOnClickLogin() {
-    userLogin();
-    setChoice(false);
+  async function buttonOnClickLogin() {
+    const user = await userLogin();
+    console.log(user);
+    onLogin(user);
     //window.location.reload();
   }
   function buttonOnClickLogout() {
     userLogout();
-    setChoice(true);
+    onLogin(null);
     //window.location.reload();
   }
 
   function UserConnect() {
-    if (choice) {
+    if (currentUser === null) {
       return (
         <ul className="navbar-nav ml-auto mr-1">
           <li className="nav-item active">
@@ -29,13 +29,9 @@ function Header() {
             </a>
           </li>
           <li className="nav-item">
-            <a
-              className="nav-link"
-              href="/login"
-              onClick={() => buttonOnClickLogin()}
-            >
+            <button className="nav-link" onClick={() => buttonOnClickLogin()}>
               Se connecter
-            </a>
+            </button>
           </li>
         </ul>
       );
@@ -43,23 +39,15 @@ function Header() {
       return (
         <ul className="navbar-nav ml-auto mr-1">
           <li className="nav-item">
-            <a className="nav-link" href="/edit">
-              Éditer le profil
-            </a>
+            <button className="nav-link">Éditer le profil</button>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/user">
-              Voir mon profil
-            </a>
+            <button className="nav-link">Voir mon profil</button>
           </li>
           <li className="nav-item">
-            <a
-              className="nav-link"
-              href="/logout"
-              onClick={() => buttonOnClickLogout()}
-            >
+            <button className="nav-link" onClick={() => buttonOnClickLogout()}>
               Se déconnecter
-            </a>
+            </button>
           </li>
         </ul>
       );
