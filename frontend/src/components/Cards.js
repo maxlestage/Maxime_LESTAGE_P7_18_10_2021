@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { getAllPost } from "../service/post.js";
 // import { getAllComment } from "../service/comment.js";
 import "../styles/card.css";
-import Comment from "./Comment";
+import Comments from "./Comments";
+// import Form from "./Form";
 import Inputpost from "./InputPost.js";
-import { postByUser } from "../service/post";
+// import { postByUser } from "../service/post";
 
 // import SignIn from "./SignIn.js";
 
@@ -18,7 +19,7 @@ function Accordion({ postId }) {
         onShow={() => setActiveIndex(1)}
         onClose={() => setActiveIndex(0)}
       >
-        <Comment postId={postId} />
+        <Comments postId={postId} />
       </Panel>
     </>
   );
@@ -98,7 +99,7 @@ function Card({ post }) {
 }
 
 function Cards() {
-  const [created, setCreated] = useState(false);
+  // const [created, setCreated] = useState(false);
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     getAllPost().then((response) => {
@@ -106,26 +107,19 @@ function Cards() {
     });
   }, []);
 
-  function handleCallBack(formData) {
-    postByUser(formData).then(setCreated(true));
+  function refreshPost() {
+    getAllPost().then((response) => {
+      setPosts(response.data);
+    });
   }
 
-  useEffect(() => {
-    console.log("created");
-    if (created) {
-      getAllPost().then((response) => {
-        setPosts(response.data);
-      });
-    }
-  }, [created]);
-
-  console.log(posts);
   return (
     <div className="card-container">
       {posts.map((post) => (
         <Card key={post.id} post={post} />
       ))}
-      <Inputpost parentCallBack={handleCallBack} />
+      <Inputpost onSubmit={refreshPost} />
+      {/* <Form /> */}
     </div>
   );
 }
