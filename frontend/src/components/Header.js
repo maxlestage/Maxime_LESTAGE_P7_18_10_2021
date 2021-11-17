@@ -1,9 +1,6 @@
-// import React, { useState } from "react";
-import { userLogin, userLogout } from "../service/login";
+import { userLogout } from "../service/login";
 import GroupomaniaBrand from "../assets/icon.svg";
-// import { getAllPost } from "../service/post.js";
 import "../styles/navbar.css";
-import SignIn from "./SignIn";
 
 function Header({ currentUser, onLogin, setIsMember }) {
   // let [choice, setChoice] = useState(true);
