@@ -1,29 +1,30 @@
 import Cards from "./Cards";
+import SignIn from "./SignIn";
 // import Login from "./Login";
 // import Comment from "./Comment";
 // import UserPost from "./UserPost";
 // import Inputpost from "./InputPost";
 // import Toasts from "./Toasts";
-import SignIn from "./SignIn";
+import SignUp from "./SignUp";
 
-function Home({ currentUser }) {
+function Home({ currentUser, isMember, onSignIn, onSignUp }) {
+  ///
+  function Connect() {
+    if (!isMember) {
+      return <SignUp onSignUp={onSignUp} />;
+    } else {
+      return <SignIn onSignIn={onSignIn} />;
+    }
+  }
+
   if (!currentUser) {
     return (
       <div className="loggin_off">
-        <SignIn />
+        <Connect />
       </div>
     );
   }
 
-  return (
-    <>
-      {/* <Login choice={choice} onClick={() => setChoice(choice + 1)} /> */}
-      {/* <Toasts /> */}
-      {/* <Inputpost /> */}
-      {/* <UserPost /> */}
-
-      <Cards />
-    </>
-  );
+  return <Cards />;
 }
 export default Home;
