@@ -1,34 +1,28 @@
 import "../styles/card.css";
-// import { postByUser } from "../service/post";
+import { postByUser } from "../service/post";
 import { useState } from "react";
 
-function Inputpost({ parentCallBack }) {
-  const [formData, setFormData] = useState({ title: "", content: "" });
+function Inputpost({ onSubmit }) {
+  const [inputs, setInputs] = useState({});
 
-  // useEffect(() => {
-  //   postByUser().then((response) => {
-  //     setFormData(response.data);
-  //   });
-  // }, []);
-
-  function handleSubmit() {
-    parentCallBack(formData);
-    setFormData({ title: "", content: "" });
-  }
-
-  // const [value, setValue] = useState('');
-  const onChange = (title, event) => {
-    setFormData({
-      ...formData,
-      [title]: event.target.value,
-    });
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setInputs((values) => ({ ...values, [name]: value }));
   };
 
-  // function handleSubmit() {
-  //   postByUser(formData);
-  // }
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      await postByUser(inputs);
+      setInputs({});
+      onSubmit();
+    } catch (error) {
+      console.log(error);
+    }
 
-  // console.log(formData);
+    // window.location.reload(false);
+  };
 
   return (
     <div className="card-container-input-post ">
@@ -37,14 +31,7 @@ function Inputpost({ parentCallBack }) {
           <div className="col-md-12">
             <div className="card">
               <div className="post-card">
-                <form
-                  // formData={formData}
-                  className="form form-input-post"
-                  onSubmit={(event) => {
-                    handleSubmit(formData);
-                    event.preventDefault();
-                  }}
-                >
+                <form className="form form-input-post" onSubmit={handleSubmit}>
                   <div>
                     <h2>
                       Vous pouvez partager vos idées avec l'équipe{" "}
@@ -61,14 +48,12 @@ function Inputpost({ parentCallBack }) {
                           title={"title"}
                           name={"title"}
                           type="text"
+                          value={inputs.title || ""}
+                          onChange={handleChange}
                           className="form-control"
                           id="TitlePost"
                           placeholder="Titre:"
                           aria-describedby="TitlePost"
-                          value={formData.title}
-                          onChange={(event) => {
-                            onChange("title", event);
-                          }}
                         />
                         <small id="TitlePost" className="form-text text-muted">
                           Le choix d'un bon titre est important.
@@ -83,14 +68,12 @@ function Inputpost({ parentCallBack }) {
                           title={"content"}
                           name={"content"}
                           type="text"
+                          value={inputs.content || ""}
+                          onChange={handleChange}
                           className="form-control"
                           id="ContentPost"
                           placeholder="Corps du message:"
                           aria-describedby="ContentPost"
-                          value={formData.content}
-                          onChange={(event) => {
-                            onChange("content", event);
-                          }}
                         />
                       </div>
                     </div>
