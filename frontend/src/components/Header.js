@@ -3,23 +3,13 @@ import GroupomaniaBrand from "../assets/icon.svg";
 import "../styles/navbar.css";
 
 function Header({ currentUser, onLogin, setIsMember }) {
-  // let [choice, setChoice] = useState(true);
-
   function buttonOnClickLogin(choice) {
-    console.log("test");
-    // console.log(setIsMember);
     setIsMember(choice);
-
-    // const user = await userLogin();
-    // console.log(user);
-    // onLogin(user);
-    //window.location.reload();
   }
 
   function buttonOnClickLogout() {
     userLogout();
     onLogin(null);
-    //window.location.reload();
   }
 
   function UserConnect() {
@@ -89,13 +79,6 @@ function Header({ currentUser, onLogin, setIsMember }) {
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <UserConnect />
-          {/* <button
-            onClick={() => {
-              getAllPost();
-            }}
-          >
-            test
-          </button> */}
         </div>
       </nav>
     </>
