@@ -12,13 +12,14 @@ function getAllComment(postId) {
   // }).then((response) => console.log(response.data));
 }
 
-function postComment(postId, userContent) {
+function postComment(postId, formData) {
   // axios.defaults.withCredentials = true;
   // postId = 2;
+  console.log(formData);
   return axios({
     method: "POST",
     url: `http://localhost:3000/api/posts/${postId}/comments`,
-    data: { content: userContent },
+    data: formData,
   });
   // .then((response) => console.log(response.data))
   // .catch();

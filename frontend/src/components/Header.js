@@ -3,16 +3,22 @@ import { userLogin, userLogout } from "../service/login";
 import GroupomaniaBrand from "../assets/icon.svg";
 // import { getAllPost } from "../service/post.js";
 import "../styles/navbar.css";
+import SignIn from "./SignIn";
 
-function Header({ currentUser, onLogin }) {
+function Header({ currentUser, onLogin, setIsMember }) {
   // let [choice, setChoice] = useState(true);
 
-  async function buttonOnClickLogin() {
-    const user = await userLogin();
-    console.log(user);
-    onLogin(user);
+  function buttonOnClickLogin(choice) {
+    console.log("test");
+    // console.log(setIsMember);
+    setIsMember(choice);
+
+    // const user = await userLogin();
+    // console.log(user);
+    // onLogin(user);
     //window.location.reload();
   }
+
   function buttonOnClickLogout() {
     userLogout();
     onLogin(null);
@@ -24,12 +30,18 @@ function Header({ currentUser, onLogin }) {
       return (
         <ul className="navbar-nav ml-auto mr-1">
           <li className="nav-item active">
-            <a className="nav-link" href="/signin">
+            <button
+              className="nav-link"
+              onClick={() => buttonOnClickLogin(false)}
+            >
               S'inscrire <span className="sr-only">(current)</span>
-            </a>
+            </button>
           </li>
           <li className="nav-item">
-            <button className="nav-link" onClick={() => buttonOnClickLogin()}>
+            <button
+              className="nav-link"
+              onClick={() => buttonOnClickLogin(true)}
+            >
               Se connecter
             </button>
           </li>
