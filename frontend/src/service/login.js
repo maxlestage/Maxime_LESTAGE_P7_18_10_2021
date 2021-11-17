@@ -1,6 +1,6 @@
 import axios from "axios";
 axios.defaults.withCredentials = true;
-function userSignUp() {
+function userSignUp(data) {
   // axios.defaults.withCredentials = true;
   return axios({
     method: "POST",
@@ -8,11 +8,11 @@ function userSignUp() {
     //   "Content-Type": "application/x-www-form-urlencoded",
     // },
     url: "http://localhost:3000/api/auth/signup",
-    data: FormData,
+    data: data,
   });
 }
 
-function userLogin() {
+function userLogin(data) {
   // axios.defaults.withCredentials = true
   return axios({
     method: "POST",
@@ -20,10 +20,7 @@ function userLogin() {
     //   "Content-Type": "application/x-www-form-urlencoded",
     // },
     url: "http://localhost:3000/api/auth/login",
-    data: {
-      mail: "max@test.com",
-      password: "jefaisuntest35",
-    },
+    data: data,
   })
     .then((response) => {
       return response.data;
