@@ -1,8 +1,8 @@
 const { User, Post } = require('../models/index.model.js');
 
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const { locals } = require('../../app.js');
+// const jwt = require('jsonwebtoken');
+// const { locals } = require('../../app.js');
 
 // Fonction pour créer un utilisateur avec un mot de passe chiffré|Hashé à l'aide de bcrypt.
 exports.userSignup = async (req, res) => {
@@ -24,6 +24,7 @@ exports.userSignup = async (req, res) => {
             profilePicture: req.file.filename, // req.body.profilePicture
             isEnable: 0, // req.body.isEnable
         });
+        req.session.userId = user.id; // userId = id > user.id
         console.log('je suis ici');
         return res.status(201).json({ message: 'Utilisateur créé' });
     }
