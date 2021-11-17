@@ -94,3 +94,7 @@ span.span.span-group {
 .text-muted {
   margin-bottom: 0.2rem;
 }
+
+.w-50 {
+  width: 80% !important;
+}
