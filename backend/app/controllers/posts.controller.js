@@ -24,7 +24,20 @@ exports.create = async (req, res) => {
 // Find a single Posts with an id
 exports.findOne = async (req, res) => {
     // console.log(req.session.userId);
-    const post = await Post.findByPk(req.params.id);
+    const post = await Post.findByPk(req.params.id, {
+        include: {
+            model: User,
+            attributes: {
+                exclude: [
+                    'password',
+                    'mail',
+                    'createdAt',
+                    'updatedAt',
+                    'isEnable',
+                ],
+            },
+        },
+    });
     if (post === null) {
         return res.status(404).json({ message: "Ce post n'éxiste pas." });
     }
@@ -33,7 +46,20 @@ exports.findOne = async (req, res) => {
 
 // Retrieve all Posts from the database.
 exports.findAll = async (req, res) => {
-    const posts = await Post.findAll();
+    const posts = await Post.findAll({
+        include: {
+            model: User,
+            attributes: {
+                exclude: [
+                    'password',
+                    'mail',
+                    'createdAt',
+                    'updatedAt',
+                    'isEnable',
+                ],
+            },
+        },
+    });
     return res.status(200).json(posts);
 };
 

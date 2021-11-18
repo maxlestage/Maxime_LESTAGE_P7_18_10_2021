@@ -8,7 +8,13 @@ module.exports = async (req, res, next) => {
         // Si la personne est connectée :
         res.locals.user = await User.findByPk(req.session.userId, {
             attributes: {
-                exclude: ['password', 'createdAt', 'updatedAt', 'isEnable'],
+                exclude: [
+                    'password',
+                    'mail',
+                    'createdAt',
+                    'updatedAt',
+                    'isEnable',
+                ],
             },
         });
         next();

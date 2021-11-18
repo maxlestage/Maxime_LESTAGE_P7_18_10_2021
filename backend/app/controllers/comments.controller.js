@@ -27,7 +27,20 @@ exports.findAllByPost = async (req, res) => {
         return res.status(404).json({ message: 'Aucun post disponible.' });
     }
 
-    const comments = await post.getComments();
+    const comments = await post.getComments({
+        include: {
+            model: User,
+            attributes: {
+                exclude: [
+                    'password',
+                    'mail',
+                    'createdAt',
+                    'updatedAt',
+                    'isEnable',
+                ],
+            },
+        },
+    });
     return res.status(200).json(comments);
 
     /* // const comments = await post.getComments()
