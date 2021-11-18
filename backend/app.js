@@ -53,6 +53,8 @@ app.get('/', (req, res) => {
     res.json({ message: 'Welcome to Groupomania BACKEND API application.' });
 });
 
+app.use('/images', express.static('images'));
+
 app.use('/api/auth', userRoutes);
 app.use('/api/posts', sessionAuth, postRoutes); // Session stock la session dans un cookie, authbyjwt permet la gestion des posts. sessionAuth
 app.use('/api/posts', sessionAuth, commentRoutes); // sessionAuth
