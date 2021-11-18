@@ -14,7 +14,7 @@ function Comment({ comment }) {
     <div key={comment.id} className="chat-message-left  pb-4">
       <div>
         <img
-          src="https://bootdey.com/img/Content/avatar/avatar3.png"
+          src={`http://localhost:3000/images/${comment.user.profilePicture}`}
           className="rounded-circle mr-1"
           alt="Sharon Lessman"
           width="40"
@@ -23,7 +23,9 @@ function Comment({ comment }) {
       </div>
 
       <div className="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
-        <div className="font-weight-bold text-left mb-1">{comment.userId}</div>
+        <div className="font-weight-bold text-left mb-1">
+          {comment.user.lastName} {comment.user.firstName}
+        </div>
         <p className="text-left">{comment.content}</p>
         <p className="text-left small">
           {`${new Intl.DateTimeFormat("fr-FR", options).format(
@@ -40,7 +42,6 @@ function Comments({ postId }) {
     getAllComment(postId).then((response) => {
       setComments(response.data);
     });
-    // console.log("hello");
   }, [postId]);
 
   const [comments, setComments] = useState([]);
