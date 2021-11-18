@@ -1,16 +1,10 @@
 import { useEffect, useState } from "react";
 import { getAllPost } from "../service/post.js";
-// import { getAllComment } from "../service/comment.js";
 import "../styles/card.css";
 import Comments from "./Comments";
-// import Form from "./Form";
 import Inputpost from "./InputPost.js";
-// import { postByUser } from "../service/post";
-
-// import SignIn from "./SignIn.js";
 
 function Accordion({ postId }) {
-  // console.log(postId);
   const [activeIndex, setActiveIndex] = useState(0);
   return (
     <>
@@ -67,12 +61,14 @@ function Card({ post }) {
             <div className="card-header">
               <div className="media flex-wrap w-100 align-items-center">
                 <img
-                  src="https://i.imgur.com/iNmBizf.jpg"
+                  src={`http://localhost:3000/images/${post.user.profilePicture}`}
                   className="d-block ui-w-40 rounded-circle"
                   alt=""
                 />
                 <div className="media-body ml-3">
-                  <a href="/user">{post.userId}</a>
+                  <a href="/user">
+                    {post.user.lastName} {post.user.firstName}
+                  </a>
                   <div className="text-muted small">
                     {`Publié le : ${new Intl.DateTimeFormat(
                       "fr-FR",
@@ -99,7 +95,6 @@ function Card({ post }) {
 }
 
 function Cards() {
-  // const [created, setCreated] = useState(false);
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     getAllPost().then((response) => {
@@ -119,7 +114,6 @@ function Cards() {
         <Card key={post.id} post={post} />
       ))}
       <Inputpost onSubmit={refreshPost} />
-      {/* <Form /> */}
     </div>
   );
 }
