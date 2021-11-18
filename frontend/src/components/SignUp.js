@@ -36,8 +36,6 @@ function SignUp({ onSignUp }) {
     } catch (error) {
       console.log(error);
     }
-
-    // window.location.reload(false);
   };
 
   return (
@@ -102,14 +100,14 @@ function SignUp({ onSignUp }) {
                   </span>
                 </div>
                 <input
-                  title="email"
-                  name="email"
+                  title="mail"
+                  name="mail"
                   onChange={handleChange}
                   value={inputs.mail}
-                  type="email"
+                  type="mail"
                   className="form-control"
+                  id="email"
                   placeholder="Mail"
-                  aria-describedby="email"
                   required
                 />
               </div>
