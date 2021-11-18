@@ -37,9 +37,11 @@ function InputComment({ postId, onSubmit }) {
             className="form-control"
             placeholder="Partagez votre avis :"
           />
-          <button type="submit" className="btn btn-primary">
-            Envoyer
-          </button>
+          <div className="input-group-append">
+            <button type="submit" className="btn btn-primary">
+              Envoyer
+            </button>
+          </div>
         </div>
       </div>
     </form>

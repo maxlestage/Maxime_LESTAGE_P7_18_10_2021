@@ -18,7 +18,7 @@ function Header({ currentUser, onLogin, setIsMember }) {
         <ul className="navbar-nav ml-auto mr-1">
           <li className="nav-item active">
             <button
-              className="nav-link"
+              className="btn btn-link"
               onClick={() => buttonOnClickLogin(false)}
             >
               S'inscrire <span className="sr-only">(current)</span>
@@ -26,7 +26,7 @@ function Header({ currentUser, onLogin, setIsMember }) {
           </li>
           <li className="nav-item">
             <button
-              className="nav-link"
+              className="btn btn-link"
               onClick={() => buttonOnClickLogin(true)}
             >
               Se connecter
@@ -38,13 +38,16 @@ function Header({ currentUser, onLogin, setIsMember }) {
       return (
         <ul className="navbar-nav ml-auto mr-1">
           <li className="nav-item">
-            <button className="nav-link">Éditer le profil</button>
+            <button className="btn btn-link">Éditer le profil</button>
           </li>
           <li className="nav-item">
-            <button className="nav-link">Voir mon profil</button>
+            <button className="btn btn-link">Voir mon profil</button>
           </li>
           <li className="nav-item">
-            <button className="nav-link" onClick={() => buttonOnClickLogout()}>
+            <button
+              className="btn btn-link"
+              onClick={() => buttonOnClickLogout()}
+            >
               Se déconnecter
             </button>
           </li>
