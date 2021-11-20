@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
         profilePicture: {
             type: DataTypes.STRING(255),
             allowNull: false,
-            defaultValue: false,
+            defaultValue: '',
         },
         isEnable: {
             type: DataTypes.BOOLEAN,

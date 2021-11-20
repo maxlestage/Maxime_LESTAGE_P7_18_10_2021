@@ -7,17 +7,17 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         },
         title: {
-            type: DataTypes.STRING(45),
-            allowNull: false,
-        },
-        content: {
             type: DataTypes.STRING(255),
             allowNull: false,
         },
-        file: {
-            type: DataTypes.BOOLEAN,
+        content: {
+            type: DataTypes.TEXT,
             allowNull: false,
-            defaultValue: false,
+        },
+        file: {
+            type: DataTypes.STRING(255),
+            allowNull: false,
+            defaultValue: '',
         },
         date: {
             type: DataTypes.DATE,
