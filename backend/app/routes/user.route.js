@@ -15,11 +15,12 @@ const userCtrl = require('../controllers/users.controller.js');
 router.post('/signup', upload.single('profilePicture'), userCtrl.userSignup);
 router.post('/login', userCtrl.userLogin);
 router.put(
-    '/edit',
+    '/edit/:id',
     sessionAuth,
     upload.single('profilePicture'),
     userCtrl.userEdit
 );
+router.delete('/delete/:id', sessionAuth, userCtrl.deleteUser);
 router.delete('/logout', sessionAuth, userCtrl.userLogout);
 router.get('/user', sessionAuth, userCtrl.userMe);
 router.get('/:id', sessionAuth, userCtrl.getAllPostsByUser); // ordre de route si route avec specificité
