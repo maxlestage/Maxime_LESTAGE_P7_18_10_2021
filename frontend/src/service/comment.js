@@ -25,33 +25,33 @@ function postComment(postId, formData) {
   // .catch();
 }
 
-function editCommentByUser(postId) {
-  // axios.defaults.withCredentials = true;
-  // postId = 2;
-  return axios({
-    method: "PUT",
-    url: `http://localhost:3000/api/posts/${postId}/comments`,
-    data: {},
-  });
-}
+// function editCommentByUser(postId) {
+//   // axios.defaults.withCredentials = true;
+//   // postId = 2;
+//   return axios({
+//     method: "PUT",
+//     url: `http://localhost:3000/api/posts/${postId}/comments`,
+//     data: {},
+//   });
+// }
 
-function deleteCommentByUser(postId) {
-  // axios.defaults.withCredentials = true;
-  // postId = 2;
-  return axios({
-    method: "DELETE",
-    url: `http://localhost:3000/api/posts/${postId}/comments`,
-  });
-}
+// function deleteCommentByUser(postId) {
+//   // axios.defaults.withCredentials = true;
+//   // postId = 2;
+//   return axios({
+//     method: "DELETE",
+//     url: `http://localhost:3000/api/posts/${postId}/comments`,
+//   });
+// }
 
-function deleteCommentByAdmin(postId) {
-  // axios.defaults.withCredentials = true;
-  // postId = 2;
-  return axios({
-    method: "PUT",
-    url: `http://localhost:3000/api/posts/${postId}/comments`,
-    data: {},
-  });
-}
+// function deleteCommentByAdmin(postId) {
+//   // axios.defaults.withCredentials = true;
+//   // postId = 2;
+//   return axios({
+//     method: "PUT",
+//     url: `http://localhost:3000/api/posts/${postId}/comments`,
+//     data: {},
+//   });
+// }
 
 export { getAllComment, postComment };
