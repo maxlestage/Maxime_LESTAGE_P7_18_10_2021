@@ -14,6 +14,20 @@ exports.userSignup = async (req, res) => {
         });
     }
     if (user === null) {
+        if (!req.file) {
+            const hash = await bcrypt.hash(req.body.password, 10);
+            user = await User.create({
+                lastName: req.body.lastName, // req.body.lastName 'Ben'
+                firstName: req.body.firstName, // req.body.firstName 'LESTAGE'
+                mail: req.body.mail, // req.body.mail 'max@max.com'
+                password: hash,
+                birthday: req.body.birthday, // req.body.birthday
+                //profilePicture: req.file.filename, // req.body.profilePicture
+                //isEnable: 0, // req.body.isEnable
+            });
+            req.session.userId = user.id; // userId = id > user.id
+            return res.status(201).json({ message: 'Utilisateur créé' });
+        }
         const hash = await bcrypt.hash(req.body.password, 10);
         user = await User.create({
             lastName: req.body.lastName, // req.body.lastName 'Ben'
@@ -22,10 +36,9 @@ exports.userSignup = async (req, res) => {
             password: hash,
             birthday: req.body.birthday, // req.body.birthday
             profilePicture: req.file.filename, // req.body.profilePicture
-            isEnable: 0, // req.body.isEnable
+            //isEnable: 0, // req.body.isEnable
         });
         req.session.userId = user.id; // userId = id > user.id
-        console.log('je suis ici');
         return res.status(201).json({ message: 'Utilisateur créé' });
     }
 };
@@ -36,17 +49,13 @@ exports.userLogin = async (req, res) => {
     if (user) {
         const password = req.body.password;
         const hash = user.password;
-        // console.log(password);
-        // console.log(hash);
+
         let valid = await bcrypt.compare(password, hash);
-        // console.log(!valid);
-        // console.log(valid);
+
         if (!valid) {
             console.log('err');
             return res.status(401).json({ error: 'Mot de passe incorrect !' });
         }
-        // console.log('bon');
-
         // Express-session :
         req.session.userId = user.id; // userId = id > user.id
 
@@ -56,11 +65,6 @@ exports.userLogin = async (req, res) => {
         delete userJson.updatedAt;
         delete userJson.isEnable;
         return res.status(200).json(userJson);
-        // .json({
-        //     token: jwt.sign({ userId: user.id }, 'RANDOM_TOKEN_SECRET', {
-        //         expiresIn: '24h',
-        //     }),
-        // });
     }
 };
 
@@ -84,16 +88,22 @@ exports.userEdit = async (req, res) => {
         return res.status(401).json({ message: 'Vous devez être connecté' });
     }
 
-    if (user) {
-        userUpdate = await user.update({
+    if (!req.file) {
+        const userUpdate = await user.update({
             lastName: req.body.lastName, // req.body.lastName 'Ben'
             firstName: req.body.firstName, // req.body.firstName 'LESTAGE'
-            birthday: req.body.birthday, // req.body.birthday
-            profilePicture: req.file.filename, // req.body.profilePicture
-            isEnable: 0, // req.body.isEnable
+            // birthday: req.body.birthday, // req.body.birthday
+            // profilePicture: req.file.filename, // req.body.profilePicture  || filename
         });
         return res.status(201).json(userUpdate.toJSON());
     }
+    const userUpdate = await user.update({
+        lastName: req.body.lastName, // req.body.lastName 'Ben'
+        firstName: req.body.firstName, // req.body.firstName 'LESTAGE'
+        // birthday: req.body.birthday, // req.body.birthday
+        profilePicture: req.file.filename, // req.body.profilePicture  || filename
+    });
+    return res.status(201).json(userUpdate.toJSON());
 };
 
 exports.userSignupAdmin = async (req, res) => {
@@ -119,8 +129,10 @@ exports.userSignupAdmin = async (req, res) => {
 };
 
 exports.userMe = async (req, res) => {
-    const user = res.locals.user;
-    return res.status(200).json(user.toJSON());
+    const user = await res.locals.user;
+    if (user) {
+        return res.status(200).json(user.toJSON());
+    }
 };
 
 // Find all posts from a user.
@@ -132,14 +144,33 @@ exports.getAllPostsByUser = async (req, res) => {
 
     const posts = await Post.findAll({
         where: { userId: req.params.id },
+        include: {
+            model: User,
+            attributes: {
+                exclude: [
+                    'password',
+                    'mail',
+                    'createdAt',
+                    'updatedAt',
+                    'isEnable',
+                ],
+            },
+        },
     });
     // console.log({ id: user.id });
     // console.log(parseInt(req.params.id));
 
-    if (posts.length) {
-        return res.status(200).json(posts);
+    return res.status(200).json(posts);
+};
+
+// Delete user
+exports.deleteUser = async (req, res) => {
+    const user = res.locals.user;
+    if (user === null) {
+        res.status(403).send("You don't have access");
     } else {
-        return res.status(404).json({ message: 'Aucun post trouvé' });
+        await user.destroy();
+        return res.status(200).json({ message: 'Utilisateur supprimé' });
     }
 };
 

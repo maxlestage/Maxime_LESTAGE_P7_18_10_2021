@@ -10,11 +10,21 @@ exports.create = async (req, res) => {
         return res.status(401).json({ message: "l'utilisateur n'existe pas." });
     }
     // console.log(user);
+    if (!req.file) {
+        const post = await user.createPost({
+            // On crée un post appartenant à ce user en particulier
+            title: req.body.title,
+            content: req.body.content,
+            //file: req.file.filename, // req.body.profilePicture
+            date: date,
+        });
+        return res.status(201).json(post.toJSON());
+    }
     const post = await user.createPost({
         // On crée un post appartenant à ce user en particulier
         title: req.body.title,
         content: req.body.content,
-        file: req.body.file,
+        file: req.file.filename, // req.body.profilePicture
         date: date,
     });
     console.log('je suis ici post Validé');
