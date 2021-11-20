@@ -8,11 +8,27 @@ button.btn.btn-primary {
 }
 
 .SignIn_title {
-  padding-bottom: 10%;
+  padding-bottom: 5%;
+}
+
+.form-edit-profil {
+  margin-bottom: 12%;
 }
 
 .footer {
   position: fixed;
   width: 100%;
   bottom: 0;
+}
+
+button.btn-SignIn {
+  margin-top: 5%;
+}
+
+.ultratest {
+  padding-bottom: 5%;
+}
+
+.span-user-connect {
+  color: #eb6a6a;
 }
