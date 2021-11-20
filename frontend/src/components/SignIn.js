@@ -20,8 +20,9 @@ function SignIn({ onSignIn }) {
     formData.append("password", inputs.password);
     try {
       await userLogin(inputs);
-      setInputs({});
+      setInputs({ mail: "", password: "" });
       onSignIn();
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
@@ -41,7 +42,7 @@ function SignIn({ onSignIn }) {
             <label htmlFor="email">Mail</label>
             <div className="input-group">
               <div className="input-group-prepend">
-                <span className="input-group-text" id="inputGroupPrepend3">
+                <span className="input-group-text" id="inputGroupMail">
                   @
                 </span>
               </div>
@@ -53,8 +54,9 @@ function SignIn({ onSignIn }) {
                 type="mail"
                 className="form-control"
                 id="email"
+                pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$"
                 placeholder="Mail"
-                aria-describedby="inputGroupPrepend3"
+                aria-describedby="inputGroupMail"
                 required
               />
             </div>
@@ -77,7 +79,7 @@ function SignIn({ onSignIn }) {
             </div>
           </div>
         </div>
-        <button className="btn btn-primary" type="submit">
+        <button className="btn btn-primary btn-SignIn" type="submit">
           Valider
         </button>
       </form>

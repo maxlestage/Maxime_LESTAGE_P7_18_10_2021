@@ -1,35 +1,40 @@
-import { getAllPost } from "../service/post";
+import { getAllPostByUser } from "../service/post";
 import { useState, useEffect } from "react";
-
-function UserPost() {
+import { Card } from "./Cards";
+import Inputpost from "./InputPost";
+import "../styles/mobile.css";
+function UserPost({ currentUser, onSubmit }) {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
-    getAllPost().then((response) => {
+    getAllPostByUser(currentUser.id).then((response) => {
       setPosts(response.data);
     });
-  }, []);
+  }, [currentUser.id]);
+
+  function refreshPost() {
+    getAllPostByUser(currentUser.id).then((response) => {
+      setPosts(response.data);
+    });
+  }
 
   return (
     <>
-      <div className="post-card w-75">
-        {posts.map((post) => (
-          <div className="card" key={post.id}>
-            <div className="card-body">
-              <h5 className="card-title">{post.title}</h5>
-              <p className="card-text">{post.content}</p>
-            </div>
-            <div className="card-footer">
-              <small className="text-muted">{post.date}</small>
-              <button
-                onClick={() => {
-                  getAllPost(post.id);
-                }}
-              >
-                view comment
-              </button>
-            </div>
-          </div>
-        ))}
+      <div className="card-container">
+        <div className="post-card mobile_post-card">
+          <Inputpost onSubmit={refreshPost} />
+          {posts
+            .sort(
+              ({ id: previousID }, { id: currentID }) => currentID - previousID
+            )
+            .map((post) => (
+              <Card
+                post={post}
+                key={post.id}
+                currentUser={currentUser}
+                onDelete={refreshPost}
+              />
+            ))}
+        </div>
       </div>
     </>
   );

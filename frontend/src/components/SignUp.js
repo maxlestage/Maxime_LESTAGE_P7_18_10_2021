@@ -33,6 +33,7 @@ function SignUp({ onSignUp }) {
       await userSignUp(formData);
       setInputs({});
       onSignUp();
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
@@ -46,6 +47,8 @@ function SignUp({ onSignUp }) {
             Vous pouvez-vous créer un compte pour partager vos idées avec
             l'équipe <span className="span span-group">Groupomania</span>
           </h2>
+          {/* <div>test</div> */}
+
           <div className="form-row">
             <div className="col-md-4 mb-3">
               <label htmlFor="firstName">Prénom</label>
@@ -104,7 +107,8 @@ function SignUp({ onSignUp }) {
                   name="mail"
                   onChange={handleChange}
                   value={inputs.mail}
-                  type="mail"
+                  type="email"
+                  pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$"
                   className="form-control"
                   id="email"
                   placeholder="Mail"
