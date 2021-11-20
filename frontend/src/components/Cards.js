@@ -115,6 +115,7 @@ export function Card({ post, info, currentUser, onDelete }) {
               <p>{post.content}</p>
               {post.file ? (
                 <img
+                  className="d-block w-100"
                   alt={"tets"}
                   src={`http://localhost:3000/images/${post.file}`}
                 ></img>
