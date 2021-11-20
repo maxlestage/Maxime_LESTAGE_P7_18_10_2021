@@ -25,24 +25,25 @@ function InputComment({ postId, onSubmit }) {
   return (
     <form onSubmit={handleSubmit}>
       <div className="flex-grow-0 py-3 px-4 border-top">
-        <div className="input-group">
-          {/* <label for="Give your idea">Partagez votre avis :</label> */}
+        <div className="form">
+          <label htmlFor="PartagezVotreAvis">Partagez votre avis </label>
           <input
             title="content"
             name="content"
             onChange={handleChange}
             value={inputs.content || ""}
-            aria-label="Partagez votre avis"
+            aria-label="Répondre"
             type="text"
-            className="form-control"
-            placeholder="Partagez votre avis :"
+            id="PartagezVotreAvis"
+            className="form-control form-comment"
+            placeholder="Répondre"
+            aria-describedby="PartagezVotreAvis"
+            required
           />
-          <div className="input-group-append">
-            <button type="submit" className="btn btn-primary">
-              Envoyer
-            </button>
-          </div>
         </div>
+        <button type="submit" className="btn btn-primary btn-comment">
+          Envoyer
+        </button>
       </div>
     </form>
   );

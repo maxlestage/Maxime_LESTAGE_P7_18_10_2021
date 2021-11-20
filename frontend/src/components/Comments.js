@@ -16,7 +16,7 @@ function Comment({ comment }) {
         <img
           src={`http://localhost:3000/images/${comment.user.profilePicture}`}
           className="rounded-circle mr-1"
-          alt="Sharon Lessman"
+          alt={`Avatar de ${comment.user.lastName} ${comment.user.firstName} `}
           width="40"
           height="40"
         />
