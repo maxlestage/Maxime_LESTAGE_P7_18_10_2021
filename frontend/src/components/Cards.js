@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { getAllPost } from "../service/post.js";
 import "../styles/card.css";
+import "../styles/mobile.css";
 import Comments from "./Comments";
 import Inputpost from "./InputPost.js";
+import { deletePostByUser } from "../service/post.js";
 
 function Accordion({ postId }) {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -21,7 +23,7 @@ function Accordion({ postId }) {
 
 function Panel({ children, isActive, onShow, onClose }) {
   return (
-    <section className="panel">
+    <>
       {isActive ? (
         <>
           {children}
@@ -42,17 +44,43 @@ function Panel({ children, isActive, onShow, onClose }) {
           Voir les commentaires
         </button>
       )}
-    </section>
+    </>
   );
 }
 
-function Card({ post }) {
+export function Card({ post, info, currentUser, onDelete }) {
   const options = {
     weekday: "long",
     year: "numeric",
     month: "long",
     day: "numeric",
   };
+
+  function DeleteButton() {
+    if (currentUser.id === post.userId || currentUser.id === 1) {
+      return (
+        <button
+          type="button"
+          className="showComment btn btn-outline-danger"
+          onClick={async () => {
+            if (
+              window.confirm("Voulez vraiment surpprimer le post ?") === true
+            ) {
+              await deletePostByUser(post.id);
+              onDelete();
+            }
+
+            ///
+          }}
+        >
+          🗑
+        </button>
+      );
+    } else {
+      return null;
+    }
+  }
+
   return (
     <div className="container-fluid mt-100">
       <div className="row">
@@ -60,15 +88,18 @@ function Card({ post }) {
           <div className="card mb-4">
             <div className="card-header">
               <div className="media flex-wrap w-100 align-items-center">
-                <img
-                  src={`http://localhost:3000/images/${post.user.profilePicture}`}
-                  className="d-block ui-w-40 rounded-circle"
-                  alt=""
-                />
+                {post.user.profilePicture ? (
+                  <img
+                    src={`http://localhost:3000/images/${post.user.profilePicture}`}
+                    className="d-block ui-w-40 rounded-circle card-avatar"
+                    alt={`Avatar de ${post.user.lastName} ${post.user.firstName} `}
+                  />
+                ) : null}
+
                 <div className="media-body ml-3">
-                  <a href="/user">
+                  <p>
                     {post.user.lastName} {post.user.firstName}
-                  </a>
+                  </p>
                   <div className="text-muted small">
                     {`Publié le : ${new Intl.DateTimeFormat(
                       "fr-FR",
@@ -76,14 +107,23 @@ function Card({ post }) {
                     ).format(new Date(post.date))}`}
                   </div>
                 </div>
+                <DeleteButton />
               </div>
             </div>
             <div className="card-body">
               <p className="card-title">{post.title}</p>
               <p>{post.content}</p>
+              {post.file ? (
+                <img
+                  alt={"tets"}
+                  src={`http://localhost:3000/images/${post.file}`}
+                ></img>
+              ) : null}
             </div>
             <div className="card-footer">
-              <div className="text-right">
+              <div className="card-button">
+                {/* <EditButton /> */}
+
                 <Accordion postId={post.id} />
               </div>
             </div>
@@ -94,7 +134,7 @@ function Card({ post }) {
   );
 }
 
-function Cards() {
+function Cards({ currentUser }) {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     getAllPost().then((response) => {
@@ -110,10 +150,18 @@ function Cards() {
 
   return (
     <div className="card-container">
-      {posts.map((post) => (
-        <Card key={post.id} post={post} />
-      ))}
       <Inputpost onSubmit={refreshPost} />
+      {posts
+        .sort(({ id: previousID }, { id: currentID }) => currentID - previousID)
+        .map((post) => (
+          <Card
+            currentUser={currentUser}
+            key={post.id}
+            post={post}
+            onDelete={refreshPost}
+            onEdit={refreshPost}
+          />
+        ))}
     </div>
   );
 }
