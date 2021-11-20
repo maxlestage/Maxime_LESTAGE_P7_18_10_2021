@@ -1,13 +1,18 @@
 import Cards from "./Cards";
 import SignIn from "./SignIn";
-// import Login from "./Login";
-// import Comment from "./Comment";
-// import UserPost from "./UserPost";
-// import Inputpost from "./InputPost";
-// import Toasts from "./Toasts";
+import UserPost from "./UserPost";
 import SignUp from "./SignUp";
+import Profile from "./Profile";
 
-function Home({ currentUser, isMember, onSignIn, onSignUp }) {
+function Home({
+  currentUser,
+  isMember,
+  onSignIn,
+  onSignUp,
+  page,
+  changePageToUserEdit,
+  setCurrentUser,
+}) {
   ///
   function Connect() {
     if (!isMember) {
@@ -25,6 +30,20 @@ function Home({ currentUser, isMember, onSignIn, onSignUp }) {
     );
   }
 
-  return <Cards />;
+  if (page === "Home") {
+    return <Cards currentUser={currentUser} />;
+  } else if (page === "Profile") {
+    return <UserPost currentUser={currentUser} />;
+  } else if (page === "Edit") {
+    return (
+      <Profile
+        currentUser={currentUser}
+        changePageToUserEdit={changePageToUserEdit}
+        setCurrentUser={setCurrentUser}
+      />
+    );
+  } else {
+    return <Cards currentUser={currentUser} />;
+  }
 }
 export default Home;

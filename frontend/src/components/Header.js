@@ -2,7 +2,7 @@ import { userLogout } from "../service/login";
 import GroupomaniaBrand from "../assets/icon.svg";
 import "../styles/navbar.css";
 
-function Header({ currentUser, onLogin, setIsMember }) {
+function Header({ currentUser, onLogin, setIsMember, changePage }) {
   function buttonOnClickLogin(choice) {
     setIsMember(choice);
   }
@@ -38,10 +38,24 @@ function Header({ currentUser, onLogin, setIsMember }) {
       return (
         <ul className="navbar-nav ml-auto mr-1">
           <li className="nav-item">
-            <button className="btn btn-link">Éditer le profil</button>
+            <button
+              className="btn btn-link"
+              onClick={() => {
+                changePage("Edit");
+              }}
+            >
+              Éditer le profil
+            </button>
           </li>
           <li className="nav-item">
-            <button className="btn btn-link">Voir mon profil</button>
+            <button
+              className="btn btn-link"
+              onClick={() => {
+                changePage("Profile");
+              }}
+            >
+              Voir mes posts
+            </button>
           </li>
           <li className="nav-item">
             <button
@@ -59,7 +73,13 @@ function Header({ currentUser, onLogin, setIsMember }) {
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <a className="navbar-brand" href="/">
+        <a
+          href="/"
+          className="navbar-brand"
+          onClick={() => {
+            changePage("Home");
+          }}
+        >
           <img
             src={GroupomaniaBrand}
             width="50"
