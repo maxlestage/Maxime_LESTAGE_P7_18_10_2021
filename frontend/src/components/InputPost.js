@@ -1,9 +1,14 @@
 import "../styles/card.css";
 import { postByUser } from "../service/post";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 function Inputpost({ onSubmit }) {
-  const [inputs, setInputs] = useState({});
+  const [inputs, setInputs] = useState({
+    title: "",
+    content: "",
+  });
+
+  const fileInput = useRef();
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -11,17 +16,35 @@ function Inputpost({ onSubmit }) {
     setInputs((values) => ({ ...values, [name]: value }));
   };
 
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   try {
+  //     await postByUser(inputs);
+  //     setInputs({});
+  //     onSubmit();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+
+  //   // window.location.reload(false);
+  // };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    const formData = new FormData();
+    formData.append("title", inputs.title);
+    formData.append("content", inputs.content);
+    formData.append("profilePicture", fileInput.current.files[0]);
+
     try {
-      await postByUser(inputs);
+      await postByUser(formData);
+      fileInput.current.value = "";
       setInputs({});
       onSubmit();
     } catch (error) {
       console.log(error);
     }
-
-    // window.location.reload(false);
   };
 
   return (
@@ -52,8 +75,9 @@ function Inputpost({ onSubmit }) {
                           onChange={handleChange}
                           className="form-control"
                           id="TitlePost"
-                          placeholder="Titre:"
+                          placeholder="Titre"
                           aria-describedby="TitlePost"
+                          required
                         />
                         <small id="TitlePost" className="form-text text-muted">
                           Le choix d'un bon titre est important.
@@ -72,8 +96,23 @@ function Inputpost({ onSubmit }) {
                           onChange={handleChange}
                           className="form-control"
                           id="ContentPost"
-                          placeholder="Corps du message:"
+                          placeholder="Message"
                           aria-describedby="ContentPost"
+                          required
+                        />
+                      </div>
+                      <div className="col-md-4 mb-3">
+                        <label htmlFor="gif">
+                          Importer une photo de profile :
+                        </label>
+                        <input
+                          title="gif"
+                          name="gif"
+                          ref={fileInput}
+                          type="file"
+                          aria-describedby="gif"
+                          className="form-control-file"
+                          id="gif"
                         />
                       </div>
                     </div>
