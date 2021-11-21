@@ -42,6 +42,7 @@ MAIL=admin@groupomania.admin.com
 PASSWORD=admin007
 BIRTHDAY=19840101
 PROFILEPICTURE=admin.png
+ISENABLE=0
 ```
 
 La configuration du fichier `.env` terminé, vous pouvez à présent passer à la suite, nous allons voir comment installer le frontend ensemble.
