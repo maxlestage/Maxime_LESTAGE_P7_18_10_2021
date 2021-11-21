@@ -115,8 +115,8 @@ export function Card({ post, info, currentUser, onDelete }) {
               <p>{post.content}</p>
               {post.file ? (
                 <img
-                  className="d-block w-100"
-                  alt={"tets"}
+                  className="d-block w-50 m-auto card-image-size"
+                  alt={`illustration du post de ${post.user.lastName} ${post.user.firstName} - post n°:${post.id}`}
                   src={`http://localhost:3000/images/${post.file}`}
                 ></img>
               ) : null}
