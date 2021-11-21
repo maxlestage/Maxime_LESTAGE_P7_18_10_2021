@@ -103,7 +103,7 @@ function Inputpost({ onSubmit }) {
                       </div>
                       <div className="col-md-4 mb-3">
                         <label htmlFor="gif">
-                          Importer une photo de profile :
+                          Importer une photo pour illustrer votre post :
                         </label>
                         <input
                           title="gif"
