@@ -29,7 +29,7 @@ SECRET_SESSION=Wee3ohwooxohf3IeC9Lah9vee
 # config db :
 DBHOST=localhost
 DBUSER=root                 #Renommez si vous avez configuré un utilisateur
-DBPASSWORD=azerty           #Remplacer "azety par votre mot de passe" mysql
+DBPASSWORD=azerty           #Remplacer "azerty" par votre mot de passe mysql
 DB=Groupomania              #Par défaut la base de donnée sera nommée "Groupomania"
 DIALECT=mysql
 
