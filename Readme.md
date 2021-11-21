@@ -1,8 +1,10 @@
 # Utiliser Groupomania localement
 
-Pour utiliser Groupomania localement, vous devez commencer par faire un : `$ git clone git@github.com:maxlestage/Maxime_LESTAGE_P7_18_10_2021.git`
+Pour utiliser Groupomania localement, vous devez commencer par faire un :  
+`$ git clone git@github.com:maxlestage/Maxime_LESTAGE_P7_18_10_2021.git`
 
-Une fois le repo recupéré, rendez-vous dans dedans à l'aide de la commande : `$ cd Maxime_LESTAGE_P7_18_10_2021`
+Une fois le repo recupéré, rendez-vous dans dedans à l'aide de la commande :  
+`$ cd Maxime_LESTAGE_P7_18_10_2021`
 
 ---
 
