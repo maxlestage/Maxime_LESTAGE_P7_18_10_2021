@@ -48,6 +48,8 @@ La configuration du fichier `.env` terminé, vous pouvez à présent passer à l
 
 ### Initialiser le frontend
 
+Ouvrez le frontend avec une nouvelle fenêtre `$ cd frontend`
+
 Le frontend a été installé à l'aide de `yarn`, ainsi je vous recommande pour éviter toutes erreurs de l'installer vous aussi à l'aide de cette commande : `$ npm install --global yarn`
 
 Une fois `yarn` installé, vous allez pouvoir éxécuter la commande `$ yarn add`
