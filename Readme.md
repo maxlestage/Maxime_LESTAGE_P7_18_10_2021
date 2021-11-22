@@ -63,7 +63,7 @@ Bon test ! 😉
 
 ### Je souhaite remercier plusieurs personnes qui m’ont accompagné pendant mon parcours de développement web :
 
-Christophe Gianorsi, qui était mon premier mentor.
+Christophe Gianorsi, qui était mon premier mentor,tu m'as donnée une organisation dans mon travail et le sens de la gestion des ressources.
 
 Babacar Sylla, qui m’a beaucoup aidé lorsque que j’ai rencontré des problèmes d’apprentissage avec le langage Ruby et le framework Ruby On Rails.
 
