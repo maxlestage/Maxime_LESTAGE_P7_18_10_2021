@@ -58,3 +58,21 @@ Une fois `yarn` installé, vous allez pouvoir éxécuter la commande `$ yarn add
 Parfait vous avez installé toutes les dependances nécessaire pour faire touner votre application frontend, à présent vous pouvez la tester à l'aide de la commande : `$ yarn start`
 
 Bon test ! 😉
+
+## Remerciement
+
+### Je souhaite remercier plusieurs personnes qui m’ont accompagné pendant mon parcours de développement web :
+
+Christophe Gianorsi, qui était mon premier mentor.
+
+Babacar Sylla, qui m’a beaucoup aidé lorsque que j’ai rencontré des problèmes d’apprentissage avec le langage Ruby et le framework Ruby On Rails.
+
+Jérémy Debelleix, qui m’a accompagné pour les dernières semaines de formation, tu as pu être disponible pour m’aider et tu m’as remonté le morale plus d’une fois.
+
+Thomas Gaudin "Nymous", rencontré sur le serveur de Grafikart, merci infiniment pour ton aide, pour ces « petits » grands cours du soir, pour ton partage de connaissance et ta disponibilité régulière pour m'aider dans mon apprentissage.
+
+"Nuker", rencontré sur le serveur de Grafikart également, merci pour ton aide régulière sur le langage Ruby au début de ma formation.
+
+"Aœrnis", ma première rencontre sur Discord, merci infiniment pour tout le temps que tu m’as consacré en début de parcours lors des pauses du midi, tu as toujours été de bons conseils et disponible pour m’accompagner dans le métier de développeurs web.
+
+Maman, pour avoir supporté mes sauts d’humeurs quand rien ne fonctionnait comme il le fallait, et aussi quand le moral était au plus bas.
