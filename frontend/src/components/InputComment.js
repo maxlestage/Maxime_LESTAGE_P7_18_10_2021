@@ -26,18 +26,20 @@ function InputComment({ postId, onSubmit }) {
     <form onSubmit={handleSubmit}>
       <div className="flex-grow-0 py-3 px-4 border-top">
         <div className="form">
-          <label htmlFor="PartagezVotreAvis">Partagez votre avis </label>
+          <label htmlFor={`PartagezVotreAvis${postId}`}>
+            Partagez votre avis{" "}
+          </label>
           <input
             title="content"
             name="content"
             onChange={handleChange}
             value={inputs.content || ""}
-            aria-label="Répondre"
+            aria-label={`PartagezVotreAvis${postId}`}
             type="text"
-            id="PartagezVotreAvis"
+            id={`PartagezVotreAvis${postId}`}
             className="form-control form-comment"
             placeholder="Répondre"
-            aria-describedby="PartagezVotreAvis"
+            aria-describedby={`PartagezVotreAvis${postId}`}
             required
           />
         </div>
