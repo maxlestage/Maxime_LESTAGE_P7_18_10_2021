@@ -15,6 +15,7 @@ function SignIn({ onSignIn }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     const formData = new FormData();
     formData.append("mail", inputs.mail);
     formData.append("password", inputs.password);
@@ -24,7 +25,7 @@ function SignIn({ onSignIn }) {
       onSignIn();
       window.location.reload();
     } catch (error) {
-      console.log(error);
+      alert("");
     }
 
     // window.location.reload(false);

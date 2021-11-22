@@ -35,7 +35,7 @@ function SignUp({ onSignUp }) {
       onSignUp();
       window.location.reload();
     } catch (error) {
-      console.log(error);
+      alert("Cette adresse mail est déjà utilisée");
     }
   };
 
