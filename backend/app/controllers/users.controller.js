@@ -1,8 +1,6 @@
 const { User, Post } = require('../models/index.model.js');
 
 const bcrypt = require('bcrypt');
-// const jwt = require('jsonwebtoken');
-// const { locals } = require('../../app.js');
 
 // Fonction pour créer un utilisateur avec un mot de passe chiffré|Hashé à l'aide de bcrypt.
 exports.userSignup = async (req, res) => {
@@ -22,8 +20,6 @@ exports.userSignup = async (req, res) => {
                 mail: req.body.mail, // req.body.mail 'max@max.com'
                 password: hash,
                 birthday: req.body.birthday, // req.body.birthday
-                //profilePicture: req.file.filename, // req.body.profilePicture
-                //isEnable: 0, // req.body.isEnable
             });
             req.session.userId = user.id; // userId = id > user.id
             return res.status(201).json({ message: 'Utilisateur créé' });
@@ -36,7 +32,6 @@ exports.userSignup = async (req, res) => {
             password: hash,
             birthday: req.body.birthday, // req.body.birthday
             profilePicture: req.file.filename, // req.body.profilePicture
-            //isEnable: 0, // req.body.isEnable
         });
         req.session.userId = user.id; // userId = id > user.id
         return res.status(201).json({ message: 'Utilisateur créé' });
@@ -53,7 +48,6 @@ exports.userLogin = async (req, res) => {
         let valid = await bcrypt.compare(password, hash);
 
         if (!valid) {
-            console.log('err');
             return res.status(401).json({ error: 'Mot de passe incorrect !' });
         }
         // Express-session :
@@ -92,15 +86,12 @@ exports.userEdit = async (req, res) => {
         const userUpdate = await user.update({
             lastName: req.body.lastName, // req.body.lastName 'Ben'
             firstName: req.body.firstName, // req.body.firstName 'LESTAGE'
-            // birthday: req.body.birthday, // req.body.birthday
-            // profilePicture: req.file.filename, // req.body.profilePicture  || filename
         });
         return res.status(201).json(userUpdate.toJSON());
     }
     const userUpdate = await user.update({
         lastName: req.body.lastName, // req.body.lastName 'Ben'
         firstName: req.body.firstName, // req.body.firstName 'LESTAGE'
-        // birthday: req.body.birthday, // req.body.birthday
         profilePicture: req.file.filename, // req.body.profilePicture  || filename
     });
     return res.status(201).json(userUpdate.toJSON());
@@ -137,11 +128,6 @@ exports.userMe = async (req, res) => {
 
 // Find all posts from a user.
 exports.getAllPostsByUser = async (req, res) => {
-    // const user = res.locals.user;
-    // if (parseInt(user.id) !== parseInt(req.params.id)) {
-    //     res.status(403).send("You don't have access");
-    // } else {
-
     const posts = await Post.findAll({
         where: { userId: req.params.id },
         include: {
@@ -157,8 +143,6 @@ exports.getAllPostsByUser = async (req, res) => {
             },
         },
     });
-    // console.log({ id: user.id });
-    // console.log(parseInt(req.params.id));
 
     return res.status(200).json(posts);
 };
@@ -173,22 +157,3 @@ exports.deleteUser = async (req, res) => {
         return res.status(200).json({ message: 'Utilisateur supprimé' });
     }
 };
-
-// // Find all posts from a user .
-// exports.getAllPostsByUser = async (req, res) => {
-//     const user = res.locals.user;
-//     const posts = await Post.findAll({
-//         where: { userId: req.params.id },
-//     });
-
-//     // console.log({ id: user.id });
-//     // console.log(parseInt(req.params.id));
-
-//     if (user.id === parseInt(req.params.id)) {
-//         return res.status(200).json(posts);
-//     } else {
-//         return res
-//             .status(404)
-//             .json({ message: 'Vous ne pouvez pas visualiser cette page' });
-//     }
-// };

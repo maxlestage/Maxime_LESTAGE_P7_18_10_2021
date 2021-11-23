@@ -16,19 +16,6 @@ function Inputpost({ onSubmit }) {
     setInputs((values) => ({ ...values, [name]: value }));
   };
 
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
-  //   try {
-  //     await postByUser(inputs);
-  //     setInputs({});
-  //     onSubmit();
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-
-  //   // window.location.reload(false);
-  // };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 

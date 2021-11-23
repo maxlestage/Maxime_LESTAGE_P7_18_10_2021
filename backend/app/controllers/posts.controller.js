@@ -9,13 +9,12 @@ exports.create = async (req, res) => {
     if (user === null) {
         return res.status(401).json({ message: "l'utilisateur n'existe pas." });
     }
-    // console.log(user);
+
     if (!req.file) {
         const post = await user.createPost({
             // On crée un post appartenant à ce user en particulier
             title: req.body.title,
             content: req.body.content,
-            //file: req.file.filename, // req.body.profilePicture
             date: date,
         });
         return res.status(201).json(post.toJSON());
@@ -24,16 +23,15 @@ exports.create = async (req, res) => {
         // On crée un post appartenant à ce user en particulier
         title: req.body.title,
         content: req.body.content,
-        file: req.file.filename, // req.body.profilePicture
+        file: req.file.filename,
         date: date,
     });
-    console.log('je suis ici post Validé');
+
     return res.status(201).json(post.toJSON());
 };
 
 // Find a single Posts with an id
 exports.findOne = async (req, res) => {
-    // console.log(req.session.userId);
     const post = await Post.findByPk(req.params.id, {
         include: {
             model: User,
@@ -118,20 +116,3 @@ exports.delete = async (req, res) => {
             .json({ message: 'Vous ne pouvez pas faire de suppression.' });
     }
 };
-
-// exports.getAllUserPosts = async (req, res) => {
-//     const post = await Post.findByPk(req.params.id);
-//     const user = res.locals.user;
-//     // console.log(user);
-//     // console.log(post.userId);
-//     if (user.id === post.userId) {
-//         const posts = await Post.findAll({
-//             where: { userId: post.userId },
-//         });
-//         return res.status(200).json(posts);
-//     } else {
-//         return res
-//             .status(401)
-//             .json({ message: "Vous n'avez pas encore poster" });
-//     }
-// };

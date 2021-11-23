@@ -42,12 +42,6 @@ exports.findAllByPost = async (req, res) => {
         },
     });
     return res.status(200).json(comments);
-
-    /* // const comments = await post.getComments()
-        identique => 
-    const comments = await Comment.findAll({
-        where: { postId: post.id },
-    }); */
 };
 
 exports.delete = async (req, res) => {
@@ -71,7 +65,3 @@ exports.delete = async (req, res) => {
             .json({ message: 'Vous ne pouvez pas faire de suppression.' });
     }
 };
-
-// select postId
-// from comment
-// where comment.postId = post.id

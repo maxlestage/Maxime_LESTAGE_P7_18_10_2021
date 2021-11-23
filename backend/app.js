@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-// const path = require("path");
+
 var cors = require('cors');
 // Middleware de gestion de session (cookie) :
 const expressSession = require('express-session');
@@ -22,22 +22,8 @@ app.use(
             'Access-Control-Request-Headers',
         ],
         credentials: true,
-        // enablePreflight: true,
     })
 );
-// app.use((req, res, next) => {
-//     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:2000', '*');
-//     res.setHeader(
-//         'Access-Control-Allow-Headers',
-//         'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization'
-//     );
-//     res.setHeader(
-//         'Access-Control-Allow-Methods',
-//         'GET, POST, PUT, DELETE, PATCH, OPTIONS'
-//     );
-//     res.setHeader('Access-Control-Allow-Credentials', true);
-//     next();
-// });
 
 // Middleware de gestion de session (cookie)
 app.use(expressSession({ secret: process.env.SECRET_SESSION })); // PWGEN 25

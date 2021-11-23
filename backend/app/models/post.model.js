@@ -28,8 +28,3 @@ module.exports = (sequelize, DataTypes) => {
 
     return Post;
 };
-// author: {
-//   type: DataTypes.INTEGER,
-//   allowNull: false,
-//   defaultValue: false,
-// },

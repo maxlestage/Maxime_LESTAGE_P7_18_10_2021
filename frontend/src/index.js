@@ -13,7 +13,7 @@ axios.interceptors.response.use(
   function (error) {
     // Do something with response error
     if (error.status === 401) {
-      console.log("t'es pas connecté");
+      console.log("tu n'es pas connecté");
     }
     return Promise.reject(error);
   }

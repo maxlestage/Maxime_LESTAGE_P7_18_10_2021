@@ -14,8 +14,3 @@ module.exports = (sequelize, DataTypes) => {
 
     return Comment;
 };
-
-// comment_author: {
-//   type: DataTypes.INTEGER,
-//   allowNull: false,
-// },
