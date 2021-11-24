@@ -59,9 +59,13 @@ Parfait vous avez installé toutes les dependances nécessaire pour faire touner
 
 Bon test ! 😉
 
+## Présentation du projet
+
+![PowerPoint](Groupomania_P7_.jpg)
+
 ## Remerciement
 
-### Je souhaite remercier plusieurs personnes qui m’ont accompagné pendant mon parcours de développement web :
+### Je souhaite remercier plusieurs personnes qui m’ont accompagné pendant mon parcours de développement web
 
 Christophe Gianorsi, qui était mon premier mentor,tu m'as donnée une organisation dans mon travail et le sens de la gestion des ressources.
 
