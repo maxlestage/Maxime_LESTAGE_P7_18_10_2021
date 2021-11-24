@@ -64,7 +64,7 @@ Bon test ! 😉
 ![PowerPoint Groupomania](https://github.com/maxlestage/Maxime_LESTAGE_P7_18_10_2021/blob/master/PowerPoint/Groupomania_P7_.jpg)
 ![PowerPoint Groupomania](https://github.com/maxlestage/Maxime_LESTAGE_P7_18_10_2021/blob/master/PowerPoint/Groupomania_P7_02.jpg)
 ![PowerPoint Groupomania](https://github.com/maxlestage/Maxime_LESTAGE_P7_18_10_2021/blob/master/PowerPoint/Groupomania_P7_03.jpg)
-![PowerPoint Groupomania](https://github.com/maxlestage/Maxime_LESTAGE_P7_18_10_2021/blob/master/PowerPoint/Groupomania_P7_04.jpg)
+![PowerPoint Groupomania](https://github.com/maxlestage/Maxime_LESTAGE_P7_18_10_2021/blob/master/PowerPoint/Groupomania_P7_4.jpg)
 ![PowerPoint Groupomania](https://github.com/maxlestage/Maxime_LESTAGE_P7_18_10_2021/blob/master/PowerPoint/Groupomania_P7_05.jpg)
 ![PowerPoint Groupomania](https://github.com/maxlestage/Maxime_LESTAGE_P7_18_10_2021/blob/master/PowerPoint/Groupomania_P7_06.jpg)
 ![PowerPoint Groupomania](https://github.com/maxlestage/Maxime_LESTAGE_P7_18_10_2021/blob/master/PowerPoint/Groupomania_P7_07.jpg)
